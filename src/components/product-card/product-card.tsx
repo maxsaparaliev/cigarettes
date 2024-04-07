@@ -1,7 +1,6 @@
 import { IconShoppingBag } from "@tabler/icons-react";
 import {
   ActionIcon,
-  Badge,
   Card,
   Center,
   Group,
@@ -58,14 +57,14 @@ export const ProductCard: React.FC<Props> = ({ data }) => {
         <Image src={image} alt={"product-card"} height={200} width={300} />
       </Card.Section>
 
-      <Badge
-        autoContrast
-        className={classes.rating}
-        color={available ? "green" : "red"}
-        size={"xs"}
-      >
-        {available ? "В наличии" : "Нет в наличии"}
-      </Badge>
+      {/*<Badge*/}
+      {/*  autoContrast*/}
+      {/*  className={classes.rating}*/}
+      {/*  color={available ? "green" : "red"}*/}
+      {/*  size={"xs"}*/}
+      {/*>*/}
+      {/*  {available ? "В наличии" : "Нет в наличии"}*/}
+      {/*</Badge>*/}
 
       <Text
         className={classes.title}

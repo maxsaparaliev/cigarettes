@@ -2,14 +2,16 @@ import { ScrollArea } from "@mantine/core";
 import { IconBuildingFactory2, IconWorld } from "@tabler/icons-react";
 import classes from "./sidebar.module.css";
 import { LinksGroup } from "@/components/links-group/links-group";
-import { useEffect, useState } from "react";
-import { getCountries, getManufacturers } from "@/api/api";
-import { TSidebarItem } from "@/api/types";
+import { useSelector } from "react-redux";
+import {
+  selectCountries,
+  selectManufacturers,
+} from "@/store/default/selectors";
+import React from "react";
 
 export const Sidebar: React.FC = () => {
-  const [manufacturers, setManufacturers] = useState<TSidebarItem[] | null>();
-  const [countries, setCountries] = useState<TSidebarItem[] | null>();
-
+  const manufacturers = useSelector(selectCountries);
+  const countries = useSelector(selectManufacturers);
   const sidebarLinks = [
     {
       label: "Производитель",
@@ -28,11 +30,6 @@ export const Sidebar: React.FC = () => {
   const sidebarItems = sidebarLinks.map((item) => (
     <LinksGroup {...item} key={item.label} />
   ));
-
-  useEffect(() => {
-    getManufacturers().then(({ data, error }) => setManufacturers(data));
-    getCountries().then(({ data, error }) => setCountries(data));
-  }, []);
 
   return (
     <nav className={classes.navbar}>

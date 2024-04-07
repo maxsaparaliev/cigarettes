@@ -9,7 +9,7 @@ import {
   UnstyledButton,
 } from "@mantine/core";
 import { IconCalendarStats, IconChevronRight } from "@tabler/icons-react";
-import classes from "./links-group.module.css";
+import classes from "./links-group.module.scss";
 import { TSidebarItem } from "@/api/types";
 
 interface LinksGroupProps {

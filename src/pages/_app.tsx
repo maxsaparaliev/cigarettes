@@ -1,11 +1,11 @@
 import { Container, Flex, MantineProvider } from "@mantine/core";
 import "../styles/globals.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { AppProps } from "next/app";
 import "@mantine/core/styles.css";
 import { Header } from "@/components/header/header";
 import { Sidebar } from "@/components/sidebar/sidebar";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { store } from "@/store/store";
 
 type NextPageComponent<P = {}> = React.FC<P> & {

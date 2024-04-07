@@ -13,3 +13,23 @@ export const SORTINGS = {
   PRICE_DESCENDING: "priceDescending",
   DEFAULT: "default",
 };
+
+export const SORT_VALUES = {
+  [SORTINGS.TITLE_ASCENDING]: {
+    column: "title",
+    ascending: true,
+  },
+  [SORTINGS.TITLE_DESCENDING]: {
+    column: "title",
+    ascending: false,
+  },
+  [SORTINGS.PRICE_ASCENDING]: {
+    column: "price",
+    ascending: true,
+  },
+  [SORTINGS.PRICE_DESCENDING]: {
+    column: "price",
+    ascending: false,
+  },
+  [SORTINGS.DEFAULT]: null,
+};

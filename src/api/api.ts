@@ -28,5 +28,5 @@ export const getProducts = async (
   if (order) {
     query.order("price", { ascending: true });
   }
-  return await query;
+  return query;
 };
