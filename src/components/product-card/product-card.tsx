@@ -52,7 +52,7 @@ export const ProductCard: React.FC<Props> = ({ data }) => {
   } = data;
 
   return (
-    <Card shadow={"xs"} radius="md" className={classes.card}>
+    <Card shadow={"md"} radius="md" className={classes.card}>
       <Card.Section>
         <Image src={image} alt={"product-card"} height={200} width={300} />
       </Card.Section>

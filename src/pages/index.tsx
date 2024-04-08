@@ -4,7 +4,7 @@ import { Sorting } from "@/components/sorting/sorting";
 import React, { useEffect, useState } from "react";
 import { Pagination } from "@/components/pagination/pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries, getManufacturers } from "@/store/default/thunks";
+import { getCountries, getManufacturers } from "@/store/common/thunks";
 import { getProducts } from "@/store/data/thunks";
 import {
   selectCurrentPage,
@@ -20,7 +20,7 @@ const Home: React.FC = () => {
   const currentPage = useSelector(selectCurrentPage);
   const totalPages = useSelector(selectTotalPages);
 
-  const [filters, setFilters] = useState<any | null>(null);
+  const [sorting, setSorting] = useState<any | null>(null);
 
   useEffect(() => {
     dispatch(getManufacturers() as any);
@@ -28,15 +28,15 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getProducts({ page: currentPage, filters }) as any);
-  }, [currentPage, filters]);
+    dispatch(getProducts({ page: currentPage, sorting }) as any);
+  }, [currentPage, sorting]);
 
   const handlePageChange = (page: number) => {
     dispatch(setCurrentPage(page));
   };
 
   const handleSorting = (value: string | null, option: ComboboxItem) => {
-    setFilters(SORT_VALUES[option.value]);
+    setSorting(SORT_VALUES[option.value]);
   };
   return (
     <>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   Box,
   Checkbox,
@@ -8,22 +8,34 @@ import {
   ThemeIcon,
   UnstyledButton,
 } from "@mantine/core";
-import { IconCalendarStats, IconChevronRight } from "@tabler/icons-react";
+import { IconChevronRight } from "@tabler/icons-react";
 import classes from "./links-group.module.scss";
 import { TSidebarItem } from "@/api/types";
+import { TSidebarFilters } from "@/components/sidebar/sidebar";
 
 interface LinksGroupProps {
   icon: React.FC<any>;
   label: string;
   initiallyOpened?: boolean;
   links?: Array<TSidebarItem> | null;
+  filters: TSidebarFilters | null;
+  setFilters: Dispatch<SetStateAction<TSidebarFilters | null>>;
+  handleCheckBox: ({ id, value }: TCheckboxValue) => void;
 }
+export type TCheckboxValue = {
+  id: string;
+  value: string;
+  label: string;
+};
 
 export function LinksGroup({
   icon: Icon,
   label,
   initiallyOpened,
   links,
+  filters,
+  setFilters,
+  handleCheckBox,
 }: LinksGroupProps) {
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
@@ -33,6 +45,9 @@ export function LinksGroup({
       key={link.id}
       className={classes.link}
       size={"xs"}
+      onChange={() =>
+        handleCheckBox({ id: link.id, value: link.value, label: label })
+      }
     />
   ));
 
@@ -66,13 +81,3 @@ export function LinksGroup({
     </>
   );
 }
-
-const mockdata = {
-  label: "Releases",
-  icon: IconCalendarStats,
-  links: [
-    { label: "Upcoming releases", link: "/" },
-    { label: "Previous releases", link: "/" },
-    { label: "Releases schedule", link: "/" },
-  ],
-};

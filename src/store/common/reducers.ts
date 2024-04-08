@@ -1,18 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TSidebarItem } from "@/api/types";
 
-interface DefaultState {
+interface CommonState {
   manufacturers: TSidebarItem[] | null;
   countries: TSidebarItem[] | null;
 }
 
 // Define the initial state
-const initialState: DefaultState = {
+const initialState: CommonState = {
   manufacturers: null,
   countries: null,
 };
 
-export const defaultReducer = createSlice({
+export const commonReducer = createSlice({
   name: "default",
   initialState,
   reducers: {
@@ -24,6 +24,6 @@ export const defaultReducer = createSlice({
     },
   },
 });
-export const { setManufacturers, setCountries } = defaultReducer.actions;
+export const { setManufacturers, setCountries } = commonReducer.actions;
 
-export default defaultReducer.reducer;
+export default commonReducer.reducer;

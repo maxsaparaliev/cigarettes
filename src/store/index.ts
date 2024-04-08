@@ -1,15 +1,15 @@
 import { combineReducers } from "redux";
 import dataReducer from "@/store/data/reducers";
-import defaultReducer from "@/store/default/reducers";
+import commonReducer from "@/store/common/reducers";
 
 export interface AppState {
   data: ReturnType<typeof dataReducer>;
-  default: ReturnType<typeof defaultReducer>;
+  common: ReturnType<typeof commonReducer>;
 }
 
 const rootReducer = combineReducers({
   data: dataReducer,
-  default: defaultReducer,
+  common: commonReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>; // Define RootState type
