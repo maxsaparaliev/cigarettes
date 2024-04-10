@@ -14,6 +14,11 @@ export const SORTINGS = {
   DEFAULT: "default",
 };
 
+export const SIDEBAR_LABELS = {
+  MANUFACTURER: "Производитель",
+  COUNTRY: "Страна",
+};
+
 export const SORT_VALUES = {
   [SORTINGS.TITLE_ASCENDING]: {
     column: "title",
@@ -32,4 +37,8 @@ export const SORT_VALUES = {
     ascending: false,
   },
   [SORTINGS.DEFAULT]: null,
+};
+
+export const LOCALSTORAGE_KEYS = {
+  ITEMS: "items",
 };

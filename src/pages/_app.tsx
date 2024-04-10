@@ -1,12 +1,15 @@
 import { Container, Flex, MantineProvider } from "@mantine/core";
 import "../styles/globals.css";
-import React, { useEffect } from "react";
+import React from "react";
 import { AppProps } from "next/app";
 import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
 import { Header } from "@/components/header/header";
 import { Sidebar } from "@/components/sidebar/sidebar";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import { store } from "@/store/store";
+import { Notifications } from "@mantine/notifications";
+import { useRouter } from "next/router";
 
 type NextPageComponent<P = {}> = React.FC<P> & {
   getInitialProps?: (ctx: any) => Promise<any>;
@@ -20,13 +23,20 @@ type MyAppProps = AppProps & {
 };
 
 function MyApp({ Component, pageProps }: MyAppProps) {
+  const router = useRouter();
+
+  const pagesWithoutSidebar = ["/basket"];
+
+  const hideSidebar = pagesWithoutSidebar.includes(router.pathname);
+
   return (
     <Provider store={store}>
       <MantineProvider>
+        <Notifications position={"top-right"} />
         <Container size="xl" style={{ minHeight: "100vh" }}>
           <Header />
           <Flex justify={"space-between"} direction={"row"}>
-            <Sidebar />
+            {!hideSidebar && <Sidebar />}
             <Container
               fluid
               style={{ width: "100%", paddingTop: 16, paddingBottom: 16 }}

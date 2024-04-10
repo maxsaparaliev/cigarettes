@@ -3,10 +3,12 @@ import { supabase } from "@/utils/supabase";
 import { PAGE_SIZE, SUPABASE_TABLES } from "@/constants/constants";
 import { setData, setTotalPages } from "@/store/data/reducers";
 import { TProductData } from "@/components/product-card/product-card";
+import { TSidebarFilters } from "@/components/sidebar/sidebar";
+import { formatPostgresQuery } from "@/utils/formatPostgresQuery";
 
 export const getProducts = createAsyncThunk<
   void,
-  { page: number; sorting?: any; filters?: any },
+  { page: number; sorting?: any; filters?: TSidebarFilters },
   { rejectValue: Error }
 >(
   "products/get",
@@ -17,22 +19,26 @@ export const getProducts = createAsyncThunk<
         .select("*", { count: "exact" })
         .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1);
 
-      console.log(sorting, "filterss");
-
       if (filters) {
-        if (filters.manufacturer) {
-          const PostGresManufacturerQuery = filters.manufacturer
-            .map((item) => `"${item}"`)
-            .join(",");
-          console.log(
-            `(${PostGresManufacturerQuery})`,
-            "PostGresManufacturerQuery",
-          );
+        if (filters.manufacturer.length) {
           query = query.filter(
             "manufacturer",
             "in",
-            `(${PostGresManufacturerQuery})`,
+            `(${formatPostgresQuery(filters.manufacturer)})`,
           );
+        }
+        if (filters.country.length) {
+          query = query.filter(
+            "manufacturer",
+            "in",
+            `(${formatPostgresQuery(filters.country)})`,
+          );
+        }
+        if (filters.minPrice) {
+          query.gte("price", filters.minPrice);
+        }
+        if (filters.maxPrice) {
+          query.lte("price", filters.maxPrice);
         }
       }
 
@@ -41,8 +47,6 @@ export const getProducts = createAsyncThunk<
           ascending: sorting.ascending,
         });
       }
-
-      console.log(filters, "filters");
 
       const { data, count } = await query;
 

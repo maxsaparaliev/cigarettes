@@ -12,6 +12,9 @@ import {
 } from "@mantine/core";
 import classes from "./product-card.module.scss";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "@/store/basket/reducers";
+import { notifications } from "@mantine/notifications";
 
 export type TProductData = {
   id: number;
@@ -30,10 +33,19 @@ export type TProductData = {
 };
 
 type Props = {
-  data: TProductData;
+  product: TProductData;
 };
-export const ProductCard: React.FC<Props> = ({ data }) => {
+export const ProductCard: React.FC<Props> = ({ product }) => {
   const theme = useMantineTheme();
+  const dispatch = useDispatch();
+
+  const addProduct = () => {
+    dispatch(addToBasket(product));
+    notifications.show({
+      title: "Default notification",
+      message: "Hey there, your code is awesome! 🤥",
+    });
+  };
 
   const {
     tar,
@@ -49,7 +61,7 @@ export const ProductCard: React.FC<Props> = ({ data }) => {
     price,
     image,
     title,
-  } = data;
+  } = product;
 
   return (
     <Card shadow={"md"} radius="md" className={classes.card}>
@@ -103,7 +115,11 @@ export const ProductCard: React.FC<Props> = ({ data }) => {
             withArrow
             openDelay={500}
           >
-            <ActionIcon className={classes.action} size="md">
+            <ActionIcon
+              className={classes.action}
+              size="md"
+              onClick={addProduct}
+            >
               <IconShoppingBag
                 style={{ width: rem(24), height: rem(24) }}
                 color={theme.colors.blue[6]}

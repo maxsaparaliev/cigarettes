@@ -19,7 +19,7 @@ interface LinksGroupProps {
   initiallyOpened?: boolean;
   links?: Array<TSidebarItem> | null;
   filters: TSidebarFilters | null;
-  setFilters: Dispatch<SetStateAction<TSidebarFilters | null>>;
+  setFilters: Dispatch<SetStateAction<TSidebarFilters>>;
   handleCheckBox: ({ id, value }: TCheckboxValue) => void;
 }
 export type TCheckboxValue = {

@@ -46,7 +46,7 @@ const Home: React.FC = () => {
       <Space h="md" />
       <SimpleGrid cols={3}>
         {data?.map((product) => (
-          <ProductCard key={product.id} data={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </SimpleGrid>
       <Center style={{ padding: "20px 0" }}>
