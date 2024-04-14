@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TProductData } from "@/components/product-card/product-card";
 
 type DataReducer = {
-  data: TProductData[] | null;
+  data: TProductData[];
   currentPage: number;
   totalPages: number;
 };
 
 const initialState: DataReducer = {
-  data: null,
+  data: [],
   currentPage: 1,
   totalPages: 0,
 };

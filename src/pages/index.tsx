@@ -25,6 +25,10 @@ const Home: React.FC = () => {
   useEffect(() => {
     dispatch(getManufacturers() as any);
     dispatch(getCountries() as any);
+    // const localStorageBasketData = JSON.parse(
+    //   localStorage.getItem(LOCALSTORAGE_KEYS.ITEMS) || "",
+    // );
+    // dispatch(getBasketData(localStorageBasketData));
   }, []);
 
   useEffect(() => {
@@ -49,6 +53,7 @@ const Home: React.FC = () => {
           <ProductCard key={product.id} product={product} />
         ))}
       </SimpleGrid>
+      <Space h={"xl"} />
       <Center style={{ padding: "20px 0" }}>
         <Pagination
           current={currentPage}
@@ -56,6 +61,7 @@ const Home: React.FC = () => {
           onChange={handlePageChange}
         />
       </Center>
+      <Space h={"md"} />
     </>
   );
 };

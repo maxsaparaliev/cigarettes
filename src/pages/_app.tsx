@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "@/store/store";
 import { Notifications } from "@mantine/notifications";
 import { useRouter } from "next/router";
+import { Inter } from "next/font/google";
 
 type NextPageComponent<P = {}> = React.FC<P> & {
   getInitialProps?: (ctx: any) => Promise<any>;
@@ -22,31 +23,36 @@ type MyAppProps = AppProps & {
   pageProps: PageProps;
 };
 
+const inter = Inter({
+  subsets: ["latin"],
+});
+
 function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter();
-
   const pagesWithoutSidebar = ["/basket"];
 
   const hideSidebar = pagesWithoutSidebar.includes(router.pathname);
 
   return (
-    <Provider store={store}>
-      <MantineProvider>
-        <Notifications position={"top-right"} />
-        <Container size="xl" style={{ minHeight: "100vh" }}>
-          <Header />
-          <Flex justify={"space-between"} direction={"row"}>
-            {!hideSidebar && <Sidebar />}
-            <Container
-              fluid
-              style={{ width: "100%", paddingTop: 16, paddingBottom: 16 }}
-            >
-              <Component {...pageProps} />
-            </Container>
-          </Flex>
-        </Container>
-      </MantineProvider>
-    </Provider>
+    <main className={inter.className}>
+      <Provider store={store}>
+        <MantineProvider>
+          <Notifications position={"top-left"} />
+          <Container size="xl" style={{ minHeight: "100vh" }}>
+            <Header />
+            <Flex justify={"space-between"} direction={"row"}>
+              {!hideSidebar && <Sidebar />}
+              <Container
+                fluid
+                style={{ width: "100%", paddingTop: 16, paddingBottom: 16 }}
+              >
+                <Component {...pageProps} />
+              </Container>
+            </Flex>
+          </Container>
+        </MantineProvider>
+      </Provider>
+    </main>
   );
 }
 

@@ -132,7 +132,7 @@ export const Sidebar: React.FC = () => {
   };
 
   const clearFilters = () => {
-    setFilters({ ...initialFilters });
+    setFilters(initialFilters);
   };
   console.log(filters, "setFilters");
   return (

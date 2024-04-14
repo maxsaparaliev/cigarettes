@@ -4,7 +4,7 @@ export enum SUPABASE_TABLES {
   products = "products",
 }
 
-export const PAGE_SIZE = 9;
+export const PAGE_SIZE = 12;
 
 export const SORTINGS = {
   TITLE_ASCENDING: "titleAscending",
@@ -41,4 +41,9 @@ export const SORT_VALUES = {
 
 export const LOCALSTORAGE_KEYS = {
   ITEMS: "items",
+};
+
+export const CONDITIONS = {
+  PLUS: "plus",
+  MINUS: "minus",
 };

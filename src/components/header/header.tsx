@@ -1,41 +1,32 @@
 import { useState } from "react";
-import { Badge, Burger, Flex, Group, NavLink } from "@mantine/core";
+import { Burger, Flex, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { MantineLogo } from "@mantinex/mantine-logo";
 import classes from "./header.module.scss";
 import { useSelector } from "react-redux";
 import { selectBasketData } from "@/store/basket/selectors";
+import Link from "next/link";
 
 const links = [{ link: "/basket", label: "Корзина/Заказать" }];
 
 export const Header = () => {
   const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
+  const [active, setActive] = useState("");
   const basketData = useSelector(selectBasketData);
 
   const items = links.map((link) => (
-    // <a
-    //   key={link.label}
-    //   href={link.link}
-    //   className={[
-    //     classes.link,
-    //     active === link.link ? classes.active : "",
-    //   ].join(" ")}
-    //   onClick={(event) => {
-    //     event.preventDefault();
-    //     setActive(link.link);
-    //   }}
-    // >
-    //   {link.label}
-    // </a>
-    <NavLink
-      label={link.label}
-      rightSection={
-        <Badge color="red" circle>
-          {basketData.length}
-        </Badge>
-      }
-    />
+    <Link
+      key={link.label}
+      href={link.link}
+      className={[classes.link, active === link.link && classes.active].join(
+        " ",
+      )}
+      onClick={() => {
+        setActive(link.link);
+      }}
+    >
+      {link.label}
+    </Link>
   ));
 
   return (

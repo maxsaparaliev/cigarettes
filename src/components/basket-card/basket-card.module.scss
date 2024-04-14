@@ -1,0 +1,30 @@
+.basketCard {
+  background: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: nowrap;
+  height: 30px;
+  &Button {
+    width: 35px;
+    text-align: center;
+    transition: 100ms linear;
+    &:hover {
+      transform: translateY(-2px)
+    }
+  }
+  &Plus{
+
+  }
+  &Minus {
+
+  }
+  &Text{
+    width: 35px;
+    text-align: center;
+    line-height: 30px;
+  }
+}
+
+.basketContainer {
+  width: 100%;
+}

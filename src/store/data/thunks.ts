@@ -29,7 +29,7 @@ export const getProducts = createAsyncThunk<
         }
         if (filters.country.length) {
           query = query.filter(
-            "manufacturer",
+            "country",
             "in",
             `(${formatPostgresQuery(filters.country)})`,
           );

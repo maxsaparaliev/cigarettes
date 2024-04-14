@@ -40,7 +40,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   const dispatch = useDispatch();
 
   const addProduct = () => {
-    dispatch(addToBasket(product));
+    dispatch(addToBasket({ ...product, amount: 1 }));
     notifications.show({
       title: "Default notification",
       message: "Hey there, your code is awesome! 🤥",
