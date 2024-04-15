@@ -47,8 +47,6 @@ const Basket = () => {
           Итого: <Mark color="gray">{totalPrice}₽</Mark>
         </Title>
       </Group>
-      <Space h={"md"} />
-      <Title order={2}>Оформить заказ</Title>
       <Space h={"xl"} />
       <GetInTouch total={totalPrice} />
     </div>

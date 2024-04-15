@@ -15,7 +15,7 @@ export const getProducts = createAsyncThunk<
   async ({ page, sorting, filters }, { rejectWithValue, dispatch }) => {
     try {
       let query = supabase
-        .from(SUPABASE_TABLES.products)
+        .from(SUPABASE_TABLES.PRODUCTS)
         .select("*", { count: "exact" })
         .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1);
 
