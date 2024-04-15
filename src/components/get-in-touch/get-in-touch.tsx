@@ -30,6 +30,7 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
 
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Некорректный email"),
+      name: (value) => (value.length > 0 ? null : "Введите Имя"),
     },
   });
 
@@ -62,6 +63,7 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
               <TextInput
                 label="Имя"
                 placeholder="Имя"
+                required
                 leftSection={
                   <IconUserCircle width={18} height={18} stroke={1} />
                 }
@@ -70,7 +72,6 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
               <TextInput
                 label="Почта"
                 placeholder="example@gmail.com"
-                required
                 leftSection={<IconAt width={18} height={18} stroke={1} />}
                 {...form.getInputProps("email")}
               />

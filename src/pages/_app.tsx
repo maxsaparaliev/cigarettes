@@ -1,5 +1,5 @@
 import { Container, Flex, MantineProvider } from "@mantine/core";
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import React from "react";
 import { AppProps } from "next/app";
 import "@mantine/core/styles.css";
@@ -29,8 +29,9 @@ const inter = Inter({
 
 function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter();
-  const pagesWithoutSidebar = ["/basket"];
+  const pagesWithoutSidebar = ["/basket", "/product/[productId]"];
 
+  console.log(router.pathname);
   const hideSidebar = pagesWithoutSidebar.includes(router.pathname);
 
   return (

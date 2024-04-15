@@ -12,8 +12,8 @@
 
 .form {
   flex: 1;
-  padding: var(--mantine-spacing-xl);
-  padding-left: calc(var(--mantine-spacing-xl) * 2);
+  padding: var(--mantine-spacing-md);
+  padding-left: calc(var(--mantine-spacing-md) * 2);
   border-left: 0;
 
   @media (max-width: 48em) {
@@ -55,7 +55,7 @@
   background-position: center;
   border: 1px solid transparent;
   padding: var(--mantine-spacing-xl);
-  flex: 0 0 40%;
+  flex: 0 0 35%;
   background-color: #D7263D;
 
   @media (max-width: 48em) {

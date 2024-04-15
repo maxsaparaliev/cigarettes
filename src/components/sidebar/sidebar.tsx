@@ -134,7 +134,6 @@ export const Sidebar: React.FC = () => {
   const clearFilters = () => {
     setFilters(initialFilters);
   };
-  console.log(filters, "setFilters");
   return (
     <nav className={classes.navbar}>
       <div className={classes.header}>
