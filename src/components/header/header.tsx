@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Burger, Flex, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { MantineLogo } from "@mantinex/mantine-logo";
 import classes from "./header.module.scss";
 import { useSelector } from "react-redux";
 import { selectBasketData } from "@/store/basket/selectors";
 import Link from "next/link";
+import { Logotype } from "@/utils/logo";
+import cn from "classnames";
 
 const links = [{ link: "/basket", label: "Корзина/Заказать" }];
 
@@ -18,9 +19,7 @@ export const Header = () => {
     <Link
       key={link.label}
       href={link.link}
-      className={[classes.link, active === link.link && classes.active].join(
-        " ",
-      )}
+      className={cn([classes.link, "text-dimmed"])}
       onClick={() => {
         setActive(link.link);
       }}
@@ -34,11 +33,13 @@ export const Header = () => {
       direction={"row"}
       justify={"space-between"}
       align={"center"}
-      className={classes.header}
+      className={cn([classes.header, "bg-dark"])}
     >
       <header className={classes.headerInner}>
         <Flex justify={"space-between"} align={"center"}>
-          <MantineLogo size={28} />
+          <Link href={"/"}>
+            <Logotype />
+          </Link>
           <Group gap={5} visibleFrom="xs">
             {items}
           </Group>

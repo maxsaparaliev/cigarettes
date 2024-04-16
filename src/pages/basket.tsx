@@ -26,9 +26,11 @@ const Basket = () => {
   );
   return (
     <div>
-      <Title order={2}>Доставка</Title>
+      <Title order={2} className={"text-dimmed"}>
+        Доставка
+      </Title>
       <Space h={"md"} />
-      <List>
+      <List className={"text-dimmed"}>
         <List.Item>Clone or download repository from GitHub</List.Item>
         <List.Item>Install dependencies with yarn</List.Item>
         <List.Item>To start development server run npm start command</List.Item>
@@ -38,7 +40,9 @@ const Basket = () => {
         <List.Item>Submit a pull request once you are done</List.Item>
       </List>
       <Space h={"md"} />
-      <Title order={2}>Корзина</Title>
+      <Title order={2} className={"text-dimmed"}>
+        Корзина
+      </Title>
       <Space h={"md"} />
       {basketData?.map((data) => <BasketCard product={data} />)}
       <Space h={"md"} />

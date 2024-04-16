@@ -12,7 +12,7 @@ export const productReducer = createSlice({
   name: "product",
   initialState,
   reducers: {
-    setProduct(state, action: PayloadAction<TProductData>) {
+    setProduct(state, action: PayloadAction<TProductData | null>) {
       state.data = action.payload;
     },
   },

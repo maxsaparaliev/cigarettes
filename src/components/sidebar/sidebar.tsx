@@ -9,7 +9,7 @@ import {
   Title,
 } from "@mantine/core";
 import { IconBuildingFactory2, IconWorld } from "@tabler/icons-react";
-import classes from "./sidebar.module.css";
+import classes from "./sidebar.module.scss";
 import {
   LinksGroup,
   TCheckboxValue,
@@ -138,29 +138,35 @@ export const Sidebar: React.FC = () => {
     <nav className={classes.navbar}>
       <div className={classes.header}>
         <Stack gap={"sm"}>
-          <Title order={4}>Цена</Title>
+          <Title order={4} className={"text-dimmed"}>
+            Цена
+          </Title>
           <NumberInput
             size={"sm"}
             placeholder="Минимальная цена"
             {...numberInputProps}
             onChange={handleMinNumberInput}
+            value={filters.minPrice || ""}
           />
           <NumberInput
             size={"sm"}
             placeholder="Максимальная цена"
             {...numberInputProps}
             onChange={handleMaxNumberInput}
+            value={filters.maxPrice || ""}
           />
         </Stack>
       </div>
       <Space h="md" />
-      <Title order={4}>Фильтры</Title>
+      <Title order={4} className={"text-dimmed"}>
+        Фильтры
+      </Title>
       <Space h="xs" />
 
       <ScrollArea className={classes.links}>
         <div className={classes.linksInner}>{sidebarItems}</div>
         <Flex gap={"sm"} justify={"center"} align={"center"}>
-          <Button onClick={clearFilters} size={"xs"}>
+          <Button onClick={clearFilters} size={"xs"} color={"main"}>
             Сбросить
           </Button>
           <Button onClick={applyFilters} size={"xs"}>

@@ -4,3 +4,5 @@ export const selectData = (state: AppState) => state.data.data;
 
 export const selectCurrentPage = (state: AppState) => state.data.currentPage;
 export const selectTotalPages = (state: AppState) => state.data.totalPages;
+
+export const selectProductsLoading = (state: AppState) => state.data.loading;

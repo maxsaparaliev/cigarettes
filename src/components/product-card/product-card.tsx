@@ -1,21 +1,23 @@
-import { IconShoppingBag } from "@tabler/icons-react";
+import { IconHeart } from "@tabler/icons-react";
 import {
   ActionIcon,
   Card,
   Center,
   Group,
   Image,
-  rem,
   Text,
   Tooltip,
   useMantineTheme,
 } from "@mantine/core";
 import classes from "./product-card.module.scss";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { addToBasket } from "@/store/basket/reducers";
+import { useDispatch, useSelector } from "react-redux";
+import { addToBasket, removeFromBasket } from "@/store/basket/reducers";
 import { notifications } from "@mantine/notifications";
 import Link from "next/link";
+import cn from "classnames";
+import { selectBasketData } from "@/store/basket/selectors";
+import { NOTIFICATION } from "@/constants/constants";
 
 export type TProductData = {
   id: number;
@@ -39,14 +41,7 @@ type Props = {
 export const ProductCard: React.FC<Props> = ({ product }) => {
   const theme = useMantineTheme();
   const dispatch = useDispatch();
-
-  const addProduct = () => {
-    dispatch(addToBasket({ ...product, amount: 1 }));
-    notifications.show({
-      title: "Default notification",
-      message: "Hey there, your code is awesome! 🤥",
-    });
-  };
+  const basketData = useSelector(selectBasketData);
 
   const {
     tar,
@@ -64,13 +59,26 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     title,
   } = product;
 
+  const isAddedToFav = basketData.find((product) => product.id === id);
+
   const productLink = {
     href: "/product/[productId]",
     as: `/product/${id}`,
   };
 
+  const addProduct = () => {
+    if (!isAddedToFav) {
+      dispatch(addToBasket({ ...product, amount: 1 }));
+      notifications.show(NOTIFICATION.added);
+    }
+    if (isAddedToFav) {
+      dispatch(removeFromBasket(id));
+      notifications.show(NOTIFICATION.removed);
+    }
+  };
+
   return (
-    <Card shadow={"md"} radius="md" className={classes.card}>
+    <Card radius="xs" className={cn([classes.card, "bg-dark"])}>
       <Card.Section>
         <Link
           className={"text-neutral-950"}
@@ -96,11 +104,12 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
         as={productLink.as}
       >
         <Text
-          className={classes.title}
+          className={cn([classes.title, "text-dark"])}
           fw={500}
           component="a"
           truncate={"end"}
           lineClamp={2}
+          c={"white"}
         >
           {title}
         </Text>
@@ -121,7 +130,9 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
       <Group justify="space-between" className={classes.footer}>
         <Center>
-          <Text fw={700}>{price} руб</Text>
+          <Text fw={700} c={"white"}>
+            {price} руб
+          </Text>
         </Center>
 
         <Group gap={8} mr={0}>
@@ -137,10 +148,14 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
               className={classes.action}
               size="md"
               onClick={addProduct}
+              variant="filled"
+              color={"#2a2a2a"}
             >
-              <IconShoppingBag
-                style={{ width: rem(24), height: rem(24) }}
-                color={theme.colors.blue[6]}
+              <IconHeart
+                stroke={1}
+                color={
+                  isAddedToFav ? theme.colors.red[5] : theme.colors.blue[6]
+                }
               />
             </ActionIcon>
           </Tooltip>

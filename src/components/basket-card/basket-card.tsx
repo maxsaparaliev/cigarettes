@@ -33,7 +33,9 @@ export const BasketCard: React.FC<TBasketCard> = ({ product }) => {
         <Group className={classes.basketContainer}>
           <Image radius="md" h={90} src={product.image} />
           <Stack gap={"xs"}>
-            <Text fw={700}>{product.title}</Text>
+            <Text fw={700} className={"text-dimmed"}>
+              {product.title}
+            </Text>
             <Group>
               <Text c="dimmed">{product.manufacturer}</Text>
               <Text c="dimmed">{product.country}</Text>
@@ -75,11 +77,12 @@ export const BasketCard: React.FC<TBasketCard> = ({ product }) => {
         </Group>
         <Group className={classes.basketContainer} grow>
           <Center>
-            <Text fw={700}>{product.price * product.amount}₽</Text>
+            <Text fw={700} className={"text-white"}>
+              {product.price * product.amount}₽
+            </Text>
           </Center>
         </Group>
       </Flex>
-      <Divider />
     </>
   );
 };

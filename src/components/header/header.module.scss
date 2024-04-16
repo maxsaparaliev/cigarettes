@@ -1,7 +1,6 @@
 .header {
-    height: 56px;
-    background-color: var(--mantine-color-body);
-    border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    height: 62px;
+    border-bottom: 1px solid #222;
     width: 100%;
 }
 .headerInner {
@@ -20,11 +19,7 @@
     padding: 8px 12px;
     border-radius: var(--mantine-radius-sm);
     text-decoration: none;
-    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
     font-size: var(--mantine-font-size-sm);
     font-weight: 500;
 }
 
-.active {
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
-}

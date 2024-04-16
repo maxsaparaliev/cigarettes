@@ -9,27 +9,29 @@ import { getProducts } from "@/store/data/thunks";
 import {
   selectCurrentPage,
   selectData,
+  selectProductsLoading,
   selectTotalPages,
 } from "@/store/data/selectors";
 import { setCurrentPage } from "@/store/data/reducers";
-import { SORT_VALUES } from "@/constants/constants";
+import { PAGE_SIZE, SORT_VALUES } from "@/constants/constants";
+import { SkeletonCard } from "@/components/skeleton-card/skeleton-card";
+import { useStorageBasket } from "@/hooks/useStorageBasket";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
-  const data = useSelector(selectData);
+  const products = useSelector(selectData);
   const currentPage = useSelector(selectCurrentPage);
   const totalPages = useSelector(selectTotalPages);
+  const isLoading = useSelector(selectProductsLoading);
 
   const [sorting, setSorting] = useState<any | null>(null);
 
   useEffect(() => {
     dispatch(getManufacturers() as any);
     dispatch(getCountries() as any);
-    // const localStorageBasketData = JSON.parse(
-    //   localStorage.getItem(LOCALSTORAGE_KEYS.ITEMS) || "",
-    // );
-    // dispatch(getBasketData(localStorageBasketData));
   }, []);
+
+  useStorageBasket();
 
   useEffect(() => {
     dispatch(getProducts({ page: currentPage, sorting }) as any);
@@ -42,16 +44,24 @@ const Home: React.FC = () => {
   const handleSorting = (value: string | null, option: ComboboxItem) => {
     setSorting(SORT_VALUES[option.value]);
   };
+
+  const renderItems = () => {
+    if (isLoading) {
+      return <SkeletonCard amount={PAGE_SIZE} />;
+    }
+    return products?.map((product) => (
+      <ProductCard key={product.id} product={product} />
+    ));
+  };
+
   return (
     <>
       <Flex justify={"flex-end"}>
         <Sorting handler={handleSorting} />
       </Flex>
       <Space h="md" />
-      <SimpleGrid cols={3}>
-        {data?.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+      <SimpleGrid spacing={"md"} cols={3}>
+        {renderItems()}
       </SimpleGrid>
       <Space h={"xl"} />
       <Center style={{ padding: "20px 0" }}>

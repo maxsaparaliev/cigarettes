@@ -1,154 +1,105 @@
-import { Flex } from "@mantine/core";
+import {
+  Button,
+  Center,
+  Flex,
+  Group,
+  Image,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { getProduct } from "@/store/product/thunks";
+import { selectProduct } from "@/store/product/selectors";
+import { addToBasket } from "@/store/basket/reducers";
+import { notifications } from "@mantine/notifications";
+import { NOTIFICATION } from "@/constants/constants";
+import { setProduct } from "@/store/product/reducers";
 
 const DetailPage = () => {
   const dispatch = useDispatch();
+  const product = useSelector(selectProduct);
   const router = useRouter();
+
+  const addProduct = () => {
+    product && dispatch(addToBasket({ ...product, amount: 1 }));
+    notifications.show(NOTIFICATION.added);
+  };
+
   const queryKey = "productId";
   const queryValue =
     router.query[queryKey] ||
     router.asPath.match(new RegExp(`[&?]${queryKey}=(.*)(&|$)`));
+
   useEffect(() => {
     if (queryValue) {
       console.log("this worked");
-      dispatch(getProduct({ id: parseInt(queryValue) }) as any);
+      dispatch(getProduct({ id: parseInt(queryValue as string) }) as any);
     }
+    return () => {
+      dispatch(setProduct(null) as any);
+    };
   }, [queryValue]);
 
   return (
     <div>
-      <Flex></Flex>
-      <div className="px-4 sm:px-0">
-        <h3 className="text-base font-semibold leading-7 text-gray-900">
-          Applicant Information
-        </h3>
-        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-          Personal details and application.
-        </p>
-      </div>
-      <div className="mt-6 border-t border-gray-100">
-        <dl className="divide-y divide-gray-100">
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Full name
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Margot Foster
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Application for
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Backend Developer
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Email address
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              margotfoster@example.com
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Salary expectation
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              $120,000
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              About
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
-              incididunt cillum culpa consequat. Excepteur qui ipsum aliquip
-              consequat sint. Sit id mollit nulla mollit nostrud in ea officia
-              proident. Irure nostrud pariatur mollit ad adipisicing
-              reprehenderit deserunt qui eu.
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Attachments
-            </dt>
-            <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              <ul
-                role="list"
-                className="divide-y divide-gray-100 rounded-md border border-gray-200"
-              >
-                <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                  <div className="flex w-0 flex-1 items-center">
-                    <svg
-                      className="h-5 w-5 flex-shrink-0 text-gray-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                      <span className="truncate font-medium">
-                        resume_back_end_developer.pdf
-                      </span>
-                      <span className="flex-shrink-0 text-gray-400">2.4mb</span>
-                    </div>
-                  </div>
-                  <div className="ml-4 flex-shrink-0">
-                    <a
-                      href="#"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Download
-                    </a>
-                  </div>
-                </li>
-                <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                  <div className="flex w-0 flex-1 items-center">
-                    <svg
-                      className="h-5 w-5 flex-shrink-0 text-gray-400"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
-                    <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                      <span className="truncate font-medium">
-                        coverletter_back_end_developer.pdf
-                      </span>
-                      <span className="flex-shrink-0 text-gray-400">4.5mb</span>
-                    </div>
-                  </div>
-                  <div className="ml-4 flex-shrink-0">
-                    <a
-                      href="#"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                    >
-                      Download
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </dd>
-          </div>
-        </dl>
-      </div>
+      <Flex>
+        <Center className={"md:w-1/2 w-full"}>
+          <Image src={product?.image} />
+        </Center>
+        <Stack gap={"lg"} className={"md:w-1/2 w-full"}>
+          <Title className={"pt-5 capitalize"} order={2}>
+            {product?.title}
+          </Title>
+          <Text size={"sm"}>{product?.description}</Text>
+          <Group gap={"xl"}>
+            <Stack>
+              <Text size="sm" c={"dimmed"}>
+                Никотин
+              </Text>
+              <Text size="sm" c={"dimmed"}>
+                Смола
+              </Text>
+              <Text size="sm" c={"dimmed"}>
+                Страна
+              </Text>
+              <Text size="sm" c={"dimmed"}>
+                Бренд
+              </Text>
+              <Text size="sm" c={"dimmed"}>
+                Упаковка
+              </Text>
+              <Text size="sm" c={"dimmed"}>
+                В наличии
+              </Text>
+              <Text size="sm" c={"dimmed"}>
+                Пачка
+              </Text>
+            </Stack>
+            <Stack>
+              <Text size="sm">{product?.nicotine}</Text>
+              <Text size="sm">{product?.tar}</Text>
+              <Text size="sm">{product?.country}</Text>
+              <Text size="sm">{product?.manufacturer}</Text>
+              <Text size="sm" c={""}>
+                {product?.capacity}
+              </Text>
+              <Text size="sm" c={""}>
+                {product?.available ? "В Наличии" : "Нет на складе"}
+              </Text>
+              <Text size="sm" c={""}>
+                {product?.pack}
+              </Text>
+            </Stack>
+          </Group>
+          <Title order={3}>{product?.price}₽</Title>
+          <Flex>
+            <Button onClick={addProduct}>Добавить в корзину</Button>
+          </Flex>
+        </Stack>
+      </Flex>
     </div>
   );
 };

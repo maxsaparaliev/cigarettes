@@ -1,9 +1,13 @@
 .card {
     position: relative;
-    background-color: var(--mantine-color-body);
-    justify-content: space-between;
+    border-radius: 5px;
+    transition: 150ms ease;
+    background-color: #1d1e1f;
+    border: 1px solid #222;
+    &:hover {
+        transform: translateY(-2px)
+    }
 }
-
 .rating {
     position: absolute;
     top: var(--mantine-spacing-xs);
@@ -12,17 +16,8 @@
 }
 
 .title {
-    display: block;
     margin-top: var(--mantine-spacing-md);
     margin-bottom: 5px;
-}
-
-.action {
-    background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
-
-    &:hover {
-        background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-6));
-    }
 }
 
 .country {

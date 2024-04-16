@@ -46,9 +46,14 @@ export const basketReducer = createSlice({
         state.data = [...action.payload];
       }
     },
+    removeFromBasket(state, action: PayloadAction<number>) {
+      const arr = state.data.filter((item) => item.id !== action.payload);
+      state.data = [...arr];
+      localStorage.setItem(LOCALSTORAGE_KEYS.ITEMS, JSON.stringify(state.data));
+    },
   },
 });
 
-export const { addToBasket, getBasketData, handleAmount } =
+export const { addToBasket, getBasketData, handleAmount, removeFromBasket } =
   basketReducer.actions;
 export default basketReducer.reducer;

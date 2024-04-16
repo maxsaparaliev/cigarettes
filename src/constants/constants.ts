@@ -47,3 +47,18 @@ export const CONDITIONS = {
   PLUS: "plus",
   MINUS: "minus",
 };
+
+export const NOTIFICATION = {
+  added: {
+    title: "Товар добавлен",
+    message: "Спасибо! Ваш товар был добавлен в корзину",
+    withBorder: true,
+    color: "green",
+  },
+  removed: {
+    title: "Товар удален",
+    message: "Ваш товар был удален из корзины",
+    withBorder: true,
+    color: "red",
+  },
+};

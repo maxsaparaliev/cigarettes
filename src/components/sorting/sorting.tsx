@@ -10,7 +10,9 @@ export const Sorting: React.FC<Props> = ({ handler }) => {
   const icon = <IconSortDescending2 stroke={1} />;
   return (
     <Group>
-      <Text fw={500}>Сортировать</Text>
+      <Text fw={500} className={"text-dimmed"}>
+        Сортировать
+      </Text>
       <Select
         placeholder="Сортировать"
         data={[

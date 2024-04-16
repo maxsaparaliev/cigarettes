@@ -45,6 +45,11 @@ export function LinksGroup({
       key={link.id}
       className={classes.link}
       size={"xs"}
+      color={"main"}
+      checked={
+        filters?.manufacturer.includes(link.value) ||
+        filters?.country.includes(link.value)
+      }
       onChange={() =>
         handleCheckBox({ id: link.id, value: link.value, label: label })
       }
@@ -59,10 +64,12 @@ export function LinksGroup({
       >
         <Group justify="space-between" gap={0}>
           <Box style={{ display: "flex", alignItems: "center" }}>
-            <ThemeIcon variant="white" color="indigo" size={24}>
+            <ThemeIcon variant="filled" color="#2a2a2a" size={24}>
               <Icon style={{ width: rem(18), height: rem(18) }} store={1} />
             </ThemeIcon>
-            <Box ml="xs">{label}</Box>
+            <Box ml="xs" className={"text-dimmed"}>
+              {label}
+            </Box>
           </Box>
           {hasLinks && (
             <IconChevronRight
