@@ -35,7 +35,6 @@ const DetailPage = () => {
 
   useEffect(() => {
     if (queryValue) {
-      console.log("this worked");
       dispatch(getProduct({ id: parseInt(queryValue as string) }) as any);
     }
     return () => {

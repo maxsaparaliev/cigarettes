@@ -1,23 +1,15 @@
 import { Group, List, Mark, Space, Title } from "@mantine/core";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectBasketData } from "@/store/basket/selectors";
 import { BasketCard } from "@/components/basket-card/basket-card";
-import { LOCALSTORAGE_KEYS } from "@/constants/constants";
-import React, { useEffect } from "react";
-import { getBasketData } from "@/store/basket/reducers";
+import React from "react";
 import { GetInTouch } from "@/components/get-in-touch/get-in-touch";
+import { useStorageBasket } from "@/hooks/useStorageBasket";
 
 const Basket = () => {
-  const dispatch = useDispatch();
   const basketData = useSelector(selectBasketData);
 
-  useEffect(() => {
-    const localStorageBasketData = localStorage.getItem(
-      LOCALSTORAGE_KEYS.ITEMS,
-    );
-
-    dispatch(getBasketData(JSON.parse(localStorageBasketData || "")));
-  }, []);
+  useStorageBasket();
 
   const totalPrice = basketData.reduce(
     (accumulator, currentItem) =>
@@ -47,7 +39,7 @@ const Basket = () => {
       {basketData?.map((data) => <BasketCard product={data} />)}
       <Space h={"md"} />
       <Group justify={"end"}>
-        <Title order={3}>
+        <Title order={3} c={"white"}>
           Итого: <Mark color="gray">{totalPrice}₽</Mark>
         </Title>
       </Group>

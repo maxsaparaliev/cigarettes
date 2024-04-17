@@ -17,6 +17,7 @@ import {
 } from "@/store/basket/reducers";
 import { CONDITIONS } from "@/constants/constants";
 import { useDispatch } from "react-redux";
+import cn from "classnames";
 
 type TBasketCard = {
   product: BasketData;
@@ -29,7 +30,7 @@ export const BasketCard: React.FC<TBasketCard> = ({ product }) => {
 
   return (
     <>
-      <Flex>
+      <Flex className={cn(["mb-2", "pb-2", classes.basketBorder])}>
         <Group className={classes.basketContainer}>
           <Image radius="md" h={90} src={product.image} />
           <Stack gap={"xs"}>

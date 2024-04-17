@@ -7,14 +7,16 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import React from "react";
+import React, { useRef } from "react";
 import { useForm } from "@mantine/form";
+import emailjs from "@emailjs/browser";
 
 type TGetInTouch = {
   total: number;
 };
 
 export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
+  const formRef = useRef();
   const form = useForm({
     initialValues: {
       name: "",
@@ -29,10 +31,38 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
     },
   });
 
+  const templateParams = {
+    name: "",
+    email: "",
+    phone: "",
+  };
+
+  console.log(formRef.current, "current");
+
+  const onSubmit = (values: any) => {
+    console.log(values, "values");
+    emailjs
+      .sendForm("service_stag0ib", "template_0vzm4jw", formRef.current!, {
+        publicKey: "UzujTRjKObn0agy1-",
+      })
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response);
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        },
+      );
+  };
+
   return (
-    <Flex justify={"center"}>
-      <form onSubmit={form.onSubmit(() => {})} className={"w-full md:w-8/12"}>
-        <Title order={2} size="h1" fw={700} ta="center">
+    <Flex justify={"center"} className={"pb-20"}>
+      <form
+        ref={formRef as any}
+        onSubmit={form.onSubmit(onSubmit)}
+        className={"w-full md:w-8/12"}
+      >
+        <Title order={2} size="h1" fw={700} ta="center" c={"white"}>
           Оформить заказ
         </Title>
 
@@ -42,12 +72,14 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
             placeholder="Ваше имя"
             name="name"
             required
+            className={"text-white"}
             {...form.getInputProps("name")}
           />
           <TextInput
             label="Почта"
             placeholder="Ваш email"
             name="email"
+            className={"text-white"}
             {...form.getInputProps("email")}
           />
         </SimpleGrid>
@@ -58,6 +90,7 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
           mt="lg"
           name="phone"
           required
+          className={"text-white"}
           {...form.getInputProps("phone")}
         />
         <Textarea
@@ -66,13 +99,14 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
           placeholder="Ваши пожелания"
           maxRows={10}
           minRows={5}
+          className={"text-white"}
           autosize
           name="message"
           {...form.getInputProps("message")}
         />
 
         <Group justify="center" mt="xl">
-          <Button type="submit" size="md">
+          <Button type="submit" size="sm" color={"main"}>
             Отправить
           </Button>
         </Group>
