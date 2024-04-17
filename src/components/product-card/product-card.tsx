@@ -15,6 +15,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addToBasket } from "@/store/basket/reducers";
 import { notifications } from "@mantine/notifications";
+import Link from "next/link";
 
 export type TProductData = {
   id: number;
@@ -63,10 +64,21 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     title,
   } = product;
 
+  const productLink = {
+    href: "/product/[productId]",
+    as: `/product/${id}`,
+  };
+
   return (
     <Card shadow={"md"} radius="md" className={classes.card}>
       <Card.Section>
-        <Image src={image} alt={"product-card"} height={200} width={300} />
+        <Link
+          className={"text-neutral-950"}
+          href={productLink.href}
+          as={productLink.as}
+        >
+          <Image src={image} alt={"product-card"} height={200} width={300} />
+        </Link>
       </Card.Section>
 
       {/*<Badge*/}
@@ -78,15 +90,21 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       {/*  {available ? "В наличии" : "Нет в наличии"}*/}
       {/*</Badge>*/}
 
-      <Text
-        className={classes.title}
-        fw={500}
-        component="a"
-        truncate={"end"}
-        lineClamp={2}
+      <Link
+        className={"text-neutral-950"}
+        href={productLink.href}
+        as={productLink.as}
       >
-        {title}
-      </Text>
+        <Text
+          className={classes.title}
+          fw={500}
+          component="a"
+          truncate={"end"}
+          lineClamp={2}
+        >
+          {title}
+        </Text>
+      </Link>
 
       <Text fz="sm" c="dimmed" lineClamp={3}>
         {description}

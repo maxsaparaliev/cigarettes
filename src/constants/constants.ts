@@ -1,7 +1,7 @@
 export enum SUPABASE_TABLES {
   MANUFACTURERS = "manufacturers",
   COUNTRIES = "countries",
-  products = "products",
+  PRODUCTS = "products",
 }
 
 export const PAGE_SIZE = 12;

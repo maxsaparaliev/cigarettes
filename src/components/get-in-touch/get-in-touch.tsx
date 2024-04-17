@@ -2,18 +2,13 @@ import {
   Button,
   Flex,
   Group,
-  Paper,
   SimpleGrid,
-  Text,
   Textarea,
   TextInput,
   Title,
 } from "@mantine/core";
-import { ContactIconsList } from "./contact-icons";
-import classes from "./get-in-touch.module.scss";
 import React from "react";
 import { useForm } from "@mantine/form";
-import { IconAt, IconPhone, IconUserCircle } from "@tabler/icons-react";
 
 type TGetInTouch = {
   total: number;
@@ -35,73 +30,53 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
   });
 
   return (
-    <Paper shadow="md" radius="lg">
-      <div className={classes.wrapper}>
-        <div className={classes.contacts}>
-          <Title order={3} fw={700} className={classes.titleDimmed} c="#fff">
-            Информация
-          </Title>
+    <Flex justify={"center"}>
+      <form onSubmit={form.onSubmit(() => {})} className={"w-full md:w-8/12"}>
+        <Title order={2} size="h1" fw={700} ta="center">
+          Оформить заказ
+        </Title>
 
-          <ContactIconsList total={total} />
-        </div>
+        <SimpleGrid cols={{ base: 1, sm: 2 }} mt="xl">
+          <TextInput
+            label="Имя"
+            placeholder="Ваше имя"
+            name="name"
+            required
+            {...form.getInputProps("name")}
+          />
+          <TextInput
+            label="Почта"
+            placeholder="Ваш email"
+            name="email"
+            {...form.getInputProps("email")}
+          />
+        </SimpleGrid>
 
-        <form
-          className={classes.form}
-          onSubmit={form.onSubmit((values) => console.log(values))}
-        >
-          <Flex direction={"column"}>
-            <Text fz="lg" fw={700} className={classes.title}>
-              Оформить заказ
-            </Text>
-            <Text size={"sm"} c={"dimmed"} className={classes.titleDimmed}>
-              С Вами свяжется наш сотрудник
-            </Text>
-          </Flex>
+        <TextInput
+          label="Телефон"
+          placeholder="Телефон"
+          mt="lg"
+          name="phone"
+          required
+          {...form.getInputProps("phone")}
+        />
+        <Textarea
+          mt="lg"
+          label="Сообщение"
+          placeholder="Ваши пожелания"
+          maxRows={10}
+          minRows={5}
+          autosize
+          name="message"
+          {...form.getInputProps("message")}
+        />
 
-          <div className={classes.fields}>
-            <SimpleGrid cols={{ base: 1, sm: 2 }}>
-              <TextInput
-                label="Имя"
-                placeholder="Имя"
-                required
-                leftSection={
-                  <IconUserCircle width={18} height={18} stroke={1} />
-                }
-                {...form.getInputProps("name")}
-              />
-              <TextInput
-                label="Почта"
-                placeholder="example@gmail.com"
-                leftSection={<IconAt width={18} height={18} stroke={1} />}
-                {...form.getInputProps("email")}
-              />
-            </SimpleGrid>
-
-            <TextInput
-              mt="md"
-              label="Телефон"
-              placeholder="Телефон"
-              required
-              leftSection={<IconPhone width={18} height={18} stroke={1} />}
-              {...form.getInputProps("phone")}
-            />
-
-            <Textarea
-              mt="md"
-              label="Пожелания"
-              placeholder="Ваше сообщение"
-              minRows={6}
-              {...form.getInputProps("message")}
-            />
-
-            <Group justify="flex-end" mt="md">
-              <Button type="submit" className={classes.control}>
-                Send message
-              </Button>
-            </Group>
-          </div>
-        </form>
-      </div>
-    </Paper>
+        <Group justify="center" mt="xl">
+          <Button type="submit" size="md">
+            Отправить
+          </Button>
+        </Group>
+      </form>
+    </Flex>
   );
 };
