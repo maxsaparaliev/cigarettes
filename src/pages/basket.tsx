@@ -36,7 +36,7 @@ const Basket = () => {
         Корзина
       </Title>
       <Space h={"md"} />
-      {basketData?.map((data) => <BasketCard product={data} />)}
+      {basketData?.map((data) => <BasketCard product={data} key={data.id} />)}
       <Space h={"md"} />
       <Group justify={"end"}>
         <Title order={3} c={"white"}>
