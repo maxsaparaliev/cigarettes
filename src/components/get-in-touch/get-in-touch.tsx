@@ -56,7 +56,7 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
   };
 
   return (
-    <Flex justify={"center"} className={"pb-20"}>
+    <Flex justify={"center"} className={"pb-20 pt-14"}>
       <form
         ref={formRef as any}
         onSubmit={form.onSubmit(onSubmit)}

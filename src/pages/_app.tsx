@@ -55,10 +55,11 @@ function MyApp({ Component, pageProps }: MyAppProps) {
           <Container size="xl" style={{ minHeight: "100vh" }}>
             <Header />
             <Flex justify={"space-between"} direction={"row"}>
-              {!hideSidebar && <Sidebar />}
+              {!hideSidebar && <Sidebar isDrawer={false} />}
               <Container
                 fluid
                 style={{ width: "100%", paddingTop: 16, paddingBottom: 16 }}
+                className={"px-0 md:px-4"}
               >
                 <Component {...pageProps} />
               </Container>

@@ -60,7 +60,10 @@ const Home: React.FC = () => {
         <Sorting handler={handleSorting} />
       </Flex>
       <Space h="md" />
-      <SimpleGrid spacing={"md"} cols={3}>
+      <SimpleGrid
+        spacing={{ base: "xs", md: "md" }}
+        cols={{ base: 2, xs: 2, md: 3 }}
+      >
         {renderItems()}
       </SimpleGrid>
       <Space h={"xl"} />

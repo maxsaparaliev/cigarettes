@@ -20,6 +20,7 @@ import React, { useState } from "react";
 import { getProducts } from "@/store/data/thunks";
 import { selectCurrentPage } from "@/store/data/selectors";
 import { SIDEBAR_LABELS } from "@/constants/constants";
+import cn from "classnames";
 
 export type TSidebarFilters = {
   minPrice: number | string;
@@ -35,7 +36,11 @@ const initialFilters: TSidebarFilters = {
   minPrice: 0,
 };
 
-export const Sidebar: React.FC = () => {
+type SidebarType = {
+  isDrawer: boolean;
+};
+
+export const Sidebar: React.FC<SidebarType> = ({ isDrawer }) => {
   const dispatch = useDispatch();
   const manufacturers = useSelector(selectCountries);
   const countries = useSelector(selectManufacturers);
@@ -135,7 +140,7 @@ export const Sidebar: React.FC = () => {
     setFilters(initialFilters);
   };
   return (
-    <nav className={classes.navbar}>
+    <nav className={cn([classes.navbar, !isDrawer && classes.navbarHide])}>
       <div className={classes.header}>
         <Stack gap={"sm"}>
           <Title order={4} className={"text-dimmed"}>

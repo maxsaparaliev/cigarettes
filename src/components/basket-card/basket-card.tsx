@@ -30,7 +30,7 @@ export const BasketCard: React.FC<TBasketCard> = ({ product }) => {
 
   return (
     <>
-      <Flex className={cn(["mb-2", "pb-2", classes.basketBorder])}>
+      <Flex className={cn(["mb-3", "pb-3", classes.basketBorder])}>
         <Group className={classes.basketContainer}>
           <Image radius="md" h={90} src={product.image} />
           <Stack gap={"xs"}>
