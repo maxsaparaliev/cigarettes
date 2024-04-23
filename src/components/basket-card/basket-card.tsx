@@ -30,8 +30,16 @@ export const BasketCard: React.FC<TBasketCard> = ({ product }) => {
 
   return (
     <>
-      <Flex className={cn(["mb-3", "pb-3", classes.basketBorder])}>
-        <Group className={classes.basketContainer}>
+      <Flex
+        direction={{
+          base: "column",
+          sm: "row",
+        }}
+        justify={"center"}
+        align={"center"}
+        className={cn(["mb-3", "pb-3", classes.basketBorder])}
+      >
+        <Group className={classes.basketContainer} grow>
           <Image radius="md" h={90} src={product.image} />
           <Stack gap={"xs"}>
             <Text fw={700} className={"text-dimmed"}>
@@ -43,25 +51,9 @@ export const BasketCard: React.FC<TBasketCard> = ({ product }) => {
             </Group>
           </Stack>
         </Group>
-        <Group className={classes.basketContainer} grow>
+        <Group className={cn([classes.basketContainer, "py-4 sm:py-0"])} grow>
           <Center>
             <div className={classes.basketCard}>
-              <UnstyledButton
-                className={[classes.basketCardButton].join(" ")}
-                onClick={() =>
-                  handleAmountButton({
-                    condition: CONDITIONS.PLUS,
-                    id: product.id,
-                  })
-                }
-              >
-                +
-              </UnstyledButton>
-              <Divider orientation="vertical" />
-              <Text fw={700} className={classes.basketCardText}>
-                {product.amount}
-              </Text>
-              <Divider orientation="vertical" />
               <UnstyledButton
                 className={[classes.basketCardButton].join(" ")}
                 onClick={() =>
@@ -72,6 +64,22 @@ export const BasketCard: React.FC<TBasketCard> = ({ product }) => {
                 }
               >
                 -
+              </UnstyledButton>
+              <Divider orientation="vertical" />
+              <Text fw={700} className={classes.basketCardText}>
+                {product.amount}
+              </Text>
+              <Divider orientation="vertical" />
+              <UnstyledButton
+                className={[classes.basketCardButton].join(" ")}
+                onClick={() =>
+                  handleAmountButton({
+                    condition: CONDITIONS.PLUS,
+                    id: product.id,
+                  })
+                }
+              >
+                +
               </UnstyledButton>
             </div>
           </Center>

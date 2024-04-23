@@ -2,6 +2,7 @@ import { Button, Container, Group, Text, Title } from "@mantine/core";
 import classes from "../styles/custom404.module.scss";
 import React from "react";
 import { Illustration } from "@/components/illustration/illustration";
+import Link from "next/link";
 
 export default function Custom404() {
   return (
@@ -9,19 +10,23 @@ export default function Custom404() {
       <div className={classes.inner}>
         <Illustration className={classes.image} />
         <div className={classes.content}>
-          <Title className={classes.title}>Nothing to see here</Title>
+          <Title className={"text-dimmed text-center py-10"}>
+            Ничего не найдено
+          </Title>
           <Text
             c="dimmed"
             size="lg"
             ta="center"
             className={classes.description}
           >
-            Page you are trying to open does not exist. You may have mistyped
-            the address, or the page has been moved to another URL. If you think
-            this is an error contact support.
+            Страница которую вы запросили не существует.
           </Text>
-          <Group justify="center">
-            <Button size="md">Take me back to home page</Button>
+          <Group justify="center" className={"pt-10 "}>
+            <Button size="md">
+              <Link className={"text-white"} href={"/"}>
+                На главную
+              </Link>
+            </Button>
           </Group>
         </div>
       </div>

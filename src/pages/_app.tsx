@@ -44,7 +44,6 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter();
   const pagesWithoutSidebar = ["/basket", "/product/[productId]"];
 
-  console.log(router.pathname);
   const hideSidebar = pagesWithoutSidebar.includes(router.pathname);
 
   return (
