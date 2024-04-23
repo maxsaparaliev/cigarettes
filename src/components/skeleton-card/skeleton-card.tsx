@@ -9,6 +9,6 @@ export const SkeletonCard: React.FC<SkeletonCardType> = ({ amount }) => {
     .fill(0)
     .map((e, i) => i + 1);
   return skeletons.map((item, idx) => (
-    <Skeleton animate={true} h={512} w={311} />
+    <Skeleton animate={true} h={512} w={311} key={idx} />
   ));
 };
