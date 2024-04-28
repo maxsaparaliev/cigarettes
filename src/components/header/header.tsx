@@ -16,11 +16,7 @@ export const Header = () => {
   const { width } = useViewportSize();
 
   const items = links.map((link) => (
-    <Link
-      key={link.label}
-      href={link.link}
-      className={cn([classes.link, "text-dimmed"])}
-    >
+    <Link key={link.label} href={link.link} className={cn([classes.link])}>
       {link.label}
     </Link>
   ));
@@ -30,7 +26,7 @@ export const Header = () => {
       direction={"row"}
       justify={"space-between"}
       align={"center"}
-      className={cn([classes.header, "bg-dark"])}
+      className={cn([classes.header])}
     >
       <header className={classes.headerInner}>
         <Flex justify={"space-between"} align={"center"}>
@@ -41,13 +37,7 @@ export const Header = () => {
             {items}
           </Group>
 
-          <Burger
-            color={"white"}
-            opened={opened}
-            onClick={toggle}
-            hiddenFrom="xs"
-            size="sm"
-          />
+          <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
 
           {width <= 576 && <MobileHeader opened={opened} onClose={toggle} />}
         </Flex>

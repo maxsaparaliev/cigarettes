@@ -1,9 +1,9 @@
 .basketCard {
-  background: #f4f2f2;
   border-radius: 8px;
   display: flex;
   flex-wrap: nowrap;
   height: 30px;
+  background-color: #f5f5f5;
   &Button {
     width: 35px;
     text-align: center;
@@ -29,6 +29,3 @@
   width: 100%;
 }
 
-.basketBorder {
-  border-bottom: 1px solid #222;
-}

@@ -37,17 +37,15 @@ export const BasketCard: React.FC<TBasketCard> = ({ product }) => {
         }}
         justify={"center"}
         align={"center"}
-        className={cn(["mb-3", "pb-3", classes.basketBorder])}
+        className={cn(["mb-3", "pb-3"])}
       >
         <Group className={classes.basketContainer} grow>
           <Image radius="md" h={90} src={product.image} />
           <Stack gap={"xs"}>
-            <Text fw={700} className={"text-dimmed"}>
-              {product.title}
-            </Text>
+            <Text fw={700}>{product.title}</Text>
             <Group>
-              <Text c="dimmed">{product.manufacturer}</Text>
-              <Text c="dimmed">{product.country}</Text>
+              <Text>{product.manufacturer}</Text>
+              <Text>{product.country}</Text>
             </Group>
           </Stack>
         </Group>
@@ -55,7 +53,7 @@ export const BasketCard: React.FC<TBasketCard> = ({ product }) => {
           <Center>
             <div className={classes.basketCard}>
               <UnstyledButton
-                className={[classes.basketCardButton].join(" ")}
+                className={classes.basketCardButton}
                 onClick={() =>
                   handleAmountButton({
                     id: product.id,
@@ -86,12 +84,11 @@ export const BasketCard: React.FC<TBasketCard> = ({ product }) => {
         </Group>
         <Group className={classes.basketContainer} grow>
           <Center>
-            <Text fw={700} className={"text-white"}>
-              {product.price * product.amount}₽
-            </Text>
+            <Text fw={700}>{product.price * product.amount}₽</Text>
           </Center>
         </Group>
       </Flex>
+      <Divider />
     </>
   );
 };

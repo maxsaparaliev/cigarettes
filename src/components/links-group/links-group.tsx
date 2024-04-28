@@ -45,7 +45,6 @@ export function LinksGroup({
       key={link.id}
       className={classes.link}
       size={"xs"}
-      color={"main"}
       checked={
         filters?.manufacturer.includes(link.value) ||
         filters?.country.includes(link.value)
@@ -64,12 +63,10 @@ export function LinksGroup({
       >
         <Group justify="space-between" gap={0}>
           <Box style={{ display: "flex", alignItems: "center" }}>
-            <ThemeIcon variant="filled" color="#2a2a2a" size={24}>
+            <ThemeIcon variant="filled" color={"indigo"} size={24}>
               <Icon style={{ width: rem(18), height: rem(18) }} store={1} />
             </ThemeIcon>
-            <Box ml="xs" className={"text-dimmed"}>
-              {label}
-            </Box>
+            <Box ml="xs">{label}</Box>
           </Box>
           {hasLinks && (
             <IconChevronRight

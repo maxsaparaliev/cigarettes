@@ -1,10 +1,4 @@
-import {
-  colorsTuple,
-  Container,
-  createTheme,
-  Flex,
-  MantineProvider,
-} from "@mantine/core";
+import { Container, Flex, MantineProvider } from "@mantine/core";
 import React from "react";
 import { AppProps } from "next/app";
 import "@mantine/core/styles.css";
@@ -32,13 +26,6 @@ type MyAppProps = AppProps & {
 const inter = Inter({
   subsets: ["latin"],
 });
-const theme = createTheme({
-  colors: {
-    main: colorsTuple("#D7263D"),
-    dark: colorsTuple("#1c1c1c"),
-    grey: colorsTuple("#ABACAD"),
-  },
-});
 
 function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter();
@@ -49,7 +36,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
   return (
     <main className={inter.className}>
       <Provider store={store}>
-        <MantineProvider theme={theme}>
+        <MantineProvider>
           <Notifications position={"top-center"} limit={3} />
           <Container size="xl" style={{ minHeight: "100vh" }}>
             <Header />

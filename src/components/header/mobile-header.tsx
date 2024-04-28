@@ -20,11 +20,10 @@ export const MobileHeader: React.FC<MobileHeaderType> = ({
     <Drawer.Root opened={opened} onClose={onClose} position={"right"}>
       <Drawer.Overlay />
       <Drawer.Content>
-        <Drawer.Header className={"bg-dark"}>
-          <Drawer.Title className={"text-dimmed"}>Фильтры</Drawer.Title>
+        <Drawer.Header>
           <Drawer.CloseButton />
         </Drawer.Header>
-        <Drawer.Body className={"bg-dark h-full"}>
+        <Drawer.Body className={" h-full"}>
           <Group grow className={"pb-4 pt-2"}>
             <Link
               onClick={onClose}

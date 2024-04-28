@@ -62,7 +62,7 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
         onSubmit={form.onSubmit(onSubmit)}
         className={"w-full md:w-8/12"}
       >
-        <Title order={2} size="h1" fw={700} ta="center" c={"white"}>
+        <Title order={2} size="h1" fw={700} ta="center">
           Оформить заказ
         </Title>
 
@@ -72,14 +72,12 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
             placeholder="Ваше имя"
             name="name"
             required
-            className={"text-white"}
             {...form.getInputProps("name")}
           />
           <TextInput
             label="Почта"
             placeholder="Ваш email"
             name="email"
-            className={"text-white"}
             {...form.getInputProps("email")}
           />
         </SimpleGrid>
@@ -90,7 +88,6 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
           mt="lg"
           name="phone"
           required
-          className={"text-white"}
           {...form.getInputProps("phone")}
         />
         <Textarea
@@ -99,14 +96,13 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
           placeholder="Ваши пожелания"
           maxRows={10}
           minRows={5}
-          className={"text-white"}
           autosize
           name="message"
           {...form.getInputProps("message")}
         />
 
         <Group justify="center" mt="xl">
-          <Button type="submit" size="sm" color={"main"}>
+          <Button type="submit" size="sm" color={"indigo"}>
             Отправить
           </Button>
         </Group>

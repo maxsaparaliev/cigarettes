@@ -14,7 +14,6 @@
 }
 
 .link {
-    background-color: #D7263D;
     display: block;
     line-height: 1;
     padding: 8px 12px;
@@ -22,5 +21,6 @@
     text-decoration: none;
     font-size: var(--mantine-font-size-sm);
     font-weight: 500;
+    color: black
 }
 

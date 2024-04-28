@@ -1,4 +1,4 @@
-import { Group, List, Mark, Space, Title } from "@mantine/core";
+import { Group, List, Space, Title } from "@mantine/core";
 import { useSelector } from "react-redux";
 import { selectBasketData } from "@/store/basket/selectors";
 import { BasketCard } from "@/components/basket-card/basket-card";
@@ -18,25 +18,19 @@ const Basket = () => {
   );
   return (
     <div>
-      <Title order={2} className={"text-dimmed"}>
-        Доставка
-      </Title>
+      <Title order={2}>Доставка</Title>
       <Space h={"md"} />
-      <List className={"text-dimmed"}>
+      <List>
         <List.Item>Доставка: Бесплатная</List.Item>
         <List.Item>Способ оплаты: Наличными курьеру</List.Item>
       </List>
       <Space h={"md"} />
-      <Title order={2} className={"text-dimmed"}>
-        Корзина
-      </Title>
+      <Title order={2}>Корзина</Title>
       <Space h={"md"} />
       {basketData?.map((data) => <BasketCard product={data} key={data.id} />)}
       <Space h={"md"} />
       <Group justify={"end"}>
-        <Title order={3} c={"white"}>
-          Итого: <Mark color="gray">{totalPrice}₽</Mark>
-        </Title>
+        <Title order={3}>Итого: {totalPrice}₽</Title>
       </Group>
       <Space h={"xl"} />
       <GetInTouch total={totalPrice} />

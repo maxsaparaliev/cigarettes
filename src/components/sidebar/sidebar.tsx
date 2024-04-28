@@ -49,13 +49,13 @@ export const Sidebar: React.FC<SidebarType> = ({ isDrawer }) => {
   const sidebarLinks = [
     {
       label: "Страна",
-      icon: IconBuildingFactory2,
       links: manufacturers,
+      icon: IconWorld,
       initiallyOpened: true,
     },
     {
       label: "Производитель",
-      icon: IconWorld,
+      icon: IconBuildingFactory2,
       initiallyOpened: true,
       links: countries,
     },
@@ -143,9 +143,7 @@ export const Sidebar: React.FC<SidebarType> = ({ isDrawer }) => {
     <nav className={cn([classes.navbar, !isDrawer && classes.navbarHide])}>
       <div className={classes.header}>
         <Stack gap={"sm"}>
-          <Title order={4} className={"text-dimmed"}>
-            Цена
-          </Title>
+          <Title order={4}>Цена</Title>
           <NumberInput
             size={"sm"}
             placeholder="Минимальная цена"
@@ -163,18 +161,16 @@ export const Sidebar: React.FC<SidebarType> = ({ isDrawer }) => {
         </Stack>
       </div>
       <Space h="md" />
-      <Title order={4} className={"text-dimmed"}>
-        Фильтры
-      </Title>
+      <Title order={4}>Фильтры</Title>
       <Space h="xs" />
 
       <ScrollArea className={classes.links}>
         <div className={classes.linksInner}>{sidebarItems}</div>
         <Flex gap={"sm"} justify={"center"} align={"center"}>
-          <Button onClick={clearFilters} size={"xs"} color={"main"}>
+          <Button onClick={clearFilters} size={"xs"} color={"red"}>
             Сбросить
           </Button>
-          <Button onClick={applyFilters} size={"xs"}>
+          <Button onClick={applyFilters} size={"xs"} color={"indigo"}>
             Применить
           </Button>
         </Flex>

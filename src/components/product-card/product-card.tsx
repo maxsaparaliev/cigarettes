@@ -78,7 +78,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   };
 
   return (
-    <Card radius="xs" className={cn([classes.card, "bg-dark"])}>
+    <Card shadow={"md"} radius="xs" className={cn([classes.card])}>
       <Card.Section>
         <Link
           className={"text-neutral-950"}
@@ -109,7 +109,6 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           component="a"
           truncate={"end"}
           lineClamp={2}
-          c={"white"}
         >
           {title}
         </Text>
@@ -130,9 +129,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
       <Group justify="space-between" className={classes.footer}>
         <Center>
-          <Text fw={700} c={"white"}>
-            {price} руб
-          </Text>
+          <Text fw={700}>{price} руб</Text>
         </Center>
 
         <Group gap={8} mr={0}>
@@ -145,17 +142,17 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
             openDelay={500}
           >
             <ActionIcon
-              className={classes.action}
+              variant={"white"}
+              color="indigo"
               size="md"
               onClick={addProduct}
-              variant="filled"
-              color={"#2a2a2a"}
             >
               <IconHeart
                 stroke={1}
                 color={
-                  isAddedToFav ? theme.colors.red[5] : theme.colors.blue[6]
+                  isAddedToFav ? theme.colors.red[8] : theme.colors.gray[8]
                 }
+                fill={isAddedToFav ? theme.colors.red[8] : theme.colors.gray[1]}
               />
             </ActionIcon>
           </Tooltip>

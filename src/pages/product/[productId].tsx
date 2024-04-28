@@ -4,6 +4,7 @@ import {
   Flex,
   Group,
   Image,
+  Loader,
   Stack,
   Text,
   Title,
@@ -23,6 +24,7 @@ const DetailPage = () => {
   const product = useSelector(selectProduct);
   const router = useRouter();
 
+  console.log(product, "product");
   const addProduct = () => {
     product && dispatch(addToBasket({ ...product, amount: 1 }));
     notifications.show(NOTIFICATION.added);
@@ -43,79 +45,57 @@ const DetailPage = () => {
   }, [queryValue]);
 
   return (
-    <div>
-      <Flex
-        direction={{
-          base: "column",
-          sm: "row",
-        }}
-      >
-        <Center className={"md:w-1/2 w-full"}>
-          <Image src={product?.image} />
+    <div className={"h-full"}>
+      {!product ? (
+        <Center className={"mt-16"}>
+          <Loader color="indigo" />
         </Center>
-        <Stack gap={"lg"} className={"md:w-1/2 w-full"}>
-          <Title className={"pt-5 capitalize text-white"} order={2}>
-            {product?.title}
-          </Title>
-          <Text size={"sm"} className={"text-white"}>
-            {product?.description}
-          </Text>
-          <Group gap={"xl"} className={""}>
-            <Stack>
-              <Text size="sm" c={"white"}>
-                Никотин
-              </Text>
-              <Text size="sm" c={"white"}>
-                Смола
-              </Text>
-              <Text size="sm" c={"white"}>
-                Страна
-              </Text>
-              <Text size="sm" c={"white"}>
-                Бренд
-              </Text>
-              <Text size="sm" c={"white"}>
-                Упаковка
-              </Text>
-              <Text size="sm" c={"white"}>
-                В наличии
-              </Text>
-              <Text size="sm" c={"white"}>
-                Пачка
-              </Text>
-            </Stack>
-            <Stack>
-              <Text size="sm" c={"white"}>
-                {product?.nicotine}
-              </Text>
-              <Text size="sm" c={"white"}>
-                {product?.tar}
-              </Text>
-              <Text size="sm" c={"white"}>
-                {product?.country}
-              </Text>
-              <Text size="sm" c={"white"}>
-                {product?.manufacturer}
-              </Text>
-              <Text size="sm" c={"white"}>
-                {product?.capacity}
-              </Text>
-              <Text size="sm" c={"white"}>
-                {product?.available ? "В Наличии" : "Нет на складе"}
-              </Text>
-              <Text size="sm" c={"white"}>
-                {product?.pack}
-              </Text>
-            </Stack>
-          </Group>
-          <Title order={3} className={"text-white"}>
-            {product?.price}₽
-          </Title>
-          <Flex>
-            <Button onClick={addProduct}>Добавить в корзину</Button>
-          </Flex>
-        </Stack>
-      </Flex>
+      ) : (
+        <Flex
+          direction={{
+            base: "column",
+            sm: "row",
+          }}
+        >
+          <Center className={"md:w-1/2 w-full"}>
+            <Image src={product?.image} />
+          </Center>
+          <Stack gap={"lg"} className={"md:w-1/2 w-full"}>
+            <Title className={"pt-5 capitalize "} order={2}>
+              {product?.title}
+            </Title>
+            <Text size={"sm"}>{product?.description}</Text>
+            <Group gap={"xl"} className={""}>
+              <Stack>
+                <Text size="sm">Никотин</Text>
+                <Text size="sm">Смола</Text>
+                <Text size="sm">Страна</Text>
+                <Text size="sm">Бренд</Text>
+                <Text size="sm">Упаковка</Text>
+                <Text size="sm">В наличии</Text>
+                <Text size="sm">Пачка</Text>
+              </Stack>
+              <Stack>
+                <Text size="sm">{product?.nicotine}</Text>
+                <Text size="sm">{product?.tar}</Text>
+                <Text size="sm">{product?.country}</Text>
+                <Text size="sm">{product?.manufacturer}</Text>
+                <Text size="sm">{product?.capacity}</Text>
+                <Text size="sm">
+                  {product?.available ? "В Наличии" : "Нет на складе"}
+                </Text>
+                <Text size="sm">{product?.pack}</Text>
+              </Stack>
+            </Group>
+            <Title order={3}>{product?.price}₽</Title>
+            <Flex>
+              <Button onClick={addProduct} color={"indigo"}>
+                Добавить в корзину
+              </Button>
+            </Flex>
+          </Stack>
+        </Flex>
+      )}
     </div>
   );
 };
