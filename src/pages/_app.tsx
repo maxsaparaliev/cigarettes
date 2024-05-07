@@ -12,6 +12,7 @@ import {Notifications} from "@mantine/notifications";
 import {useRouter} from "next/router";
 import {Inter} from "next/font/google";
 import ErrorBoundary from "../hooks/errorBoundary";
+import {FooterLinks} from "../components/footer/footer";
 
 type NextPageComponent<P = {}> = React.FC<P> & {
   getInitialProps?: (ctx: any) => Promise<any>;
@@ -54,6 +55,7 @@ function MyApp({Component, pageProps}: MyAppProps) {
               </Container>
             </Flex>
           </Container>
+          <FooterLinks/>
         </MantineProvider>
       </Provider>
     </main>
