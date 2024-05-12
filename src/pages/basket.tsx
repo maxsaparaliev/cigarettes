@@ -4,12 +4,9 @@ import { selectBasketData } from "@/store/basket/selectors";
 import { BasketCard } from "@/components/basket-card/basket-card";
 import React from "react";
 import { GetInTouch } from "@/components/get-in-touch/get-in-touch";
-import { useStorageBasket } from "@/hooks/useStorageBasket";
 
 const Basket = () => {
   const basketData = useSelector(selectBasketData);
-
-  useStorageBasket();
 
   const totalPrice = basketData.reduce(
     (accumulator, currentItem) =>

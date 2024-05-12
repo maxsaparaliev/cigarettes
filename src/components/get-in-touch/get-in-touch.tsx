@@ -10,6 +10,10 @@ import {
 import React, { useRef } from "react";
 import { useForm } from "@mantine/form";
 import emailjs from "@emailjs/browser";
+import { notifications } from "@mantine/notifications";
+import { NOTIFICATION } from "@/constants/constants";
+import { useSelector } from "react-redux";
+import { selectBasketData } from "@/store/basket/selectors";
 
 type TGetInTouch = {
   total: number;
@@ -17,42 +21,37 @@ type TGetInTouch = {
 
 export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
   const formRef = useRef();
+  const basketData = useSelector(selectBasketData);
   const form = useForm({
     initialValues: {
       name: "",
       email: "",
       phone: "",
       message: "",
+      products: "",
     },
-
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Некорректный email"),
       name: (value) => (value.length > 0 ? null : "Введите Имя"),
     },
   });
 
-  const templateParams = {
-    name: "",
-    email: "",
-    phone: "",
-  };
-
-  console.log(formRef.current, "current");
-
+  const selectedProducts = basketData
+    .map((item) => `${item.title} количество: ${item.amount}`)
+    .join(", ");
   const onSubmit = (values: any) => {
-    console.log(values, "values");
+    form.setValues((values) => ({
+      ...values,
+      products: `${selectedProducts}, Всего: ${total} руб.`,
+    }));
     emailjs
       .sendForm("service_stag0ib", "template_0vzm4jw", formRef.current!, {
         publicKey: "UzujTRjKObn0agy1-",
       })
-      .then(
-        (response) => {
-          console.log("SUCCESS!", response);
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-        },
-      );
+      .then(() => {
+        form.reset();
+        notifications.show(NOTIFICATION.sended);
+      });
   };
 
   return (
@@ -99,6 +98,12 @@ export const GetInTouch: React.FC<TGetInTouch> = ({ total }) => {
           autosize
           name="message"
           {...form.getInputProps("message")}
+        />
+        <input
+          type={"hidden"}
+          required={false}
+          name={"products"}
+          value={`${selectedProducts}, Всего: ${total} руб.`}
         />
 
         <Group justify="center" mt="xl">

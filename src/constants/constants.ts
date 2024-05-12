@@ -61,4 +61,10 @@ export const NOTIFICATION = {
     withBorder: true,
     color: "red",
   },
+  sended: {
+    title: "Ваша заявка отправлена!",
+    message: "Спасибо! Ваша заявка была отправлена, скоро с Вами свяжутся",
+    withBorder: true,
+    color: "green",
+  },
 };

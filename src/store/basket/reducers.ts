@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TProductData } from "@/components/product-card/product-card";
-import { CONDITIONS, LOCALSTORAGE_KEYS } from "@/constants/constants";
+import { CONDITIONS } from "@/constants/constants";
 
 export type THandleAmount = Pick<BasketData, "id"> & {
   condition: string;
@@ -24,10 +24,6 @@ export const basketReducer = createSlice({
       const item = state.data.find((item) => item.id === action.payload.id);
       if (!item) {
         state.data = [...state.data, action.payload];
-        localStorage.setItem(
-          LOCALSTORAGE_KEYS.ITEMS,
-          JSON.stringify(state.data),
-        );
       }
     },
     handleAmount(state, action: PayloadAction<THandleAmount>) {
@@ -49,7 +45,6 @@ export const basketReducer = createSlice({
     removeFromBasket(state, action: PayloadAction<number>) {
       const arr = state.data.filter((item) => item.id !== action.payload);
       state.data = [...arr];
-      localStorage.setItem(LOCALSTORAGE_KEYS.ITEMS, JSON.stringify(state.data));
     },
   },
 });

@@ -15,7 +15,6 @@ import {
 import { setCurrentPage } from "@/store/data/reducers";
 import { PAGE_SIZE, SORT_VALUES } from "@/constants/constants";
 import { SkeletonCard } from "@/components/skeleton-card/skeleton-card";
-import { useStorageBasket } from "@/hooks/useStorageBasket";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,8 +29,6 @@ const Home: React.FC = () => {
     dispatch(getManufacturers() as any);
     dispatch(getCountries() as any);
   }, []);
-
-  useStorageBasket();
 
   useEffect(() => {
     dispatch(getProducts({ page: currentPage, sorting }) as any);
