@@ -2,6 +2,7 @@ export enum SUPABASE_TABLES {
   MANUFACTURERS = "manufacturers",
   COUNTRIES = "countries",
   PRODUCTS = "products",
+  STRENGTH = "strength",
 }
 
 export const PAGE_SIZE = 12;
@@ -17,6 +18,7 @@ export const SORTINGS = {
 export const SIDEBAR_LABELS = {
   MANUFACTURER: "Производитель",
   COUNTRY: "Страна",
+  STRENGTH: "Крепкость",
 };
 
 export const SORT_VALUES = {

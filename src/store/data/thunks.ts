@@ -34,6 +34,13 @@ export const getProducts = createAsyncThunk<
             `(${formatPostgresQuery(filters.country)})`,
           );
         }
+        if (filters.strength.length) {
+          query = query.filter(
+            "strength",
+            "in",
+            `(${formatPostgresQuery(filters.strength)})`,
+          );
+        }
         if (filters.minPrice) {
           query.gte("price", filters.minPrice);
         }

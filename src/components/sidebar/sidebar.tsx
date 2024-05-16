@@ -8,14 +8,14 @@ import {
   Stack,
   Title,
 } from "@mantine/core";
-import { IconBuildingFactory2, IconWorld } from "@tabler/icons-react";
+import {IconBuildingFactory2, IconChartBar, IconWorld} from "@tabler/icons-react";
 import classes from "./sidebar.module.scss";
 import {
   LinksGroup,
   TCheckboxValue,
 } from "@/components/links-group/links-group";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCountries, selectManufacturers } from "@/store/common/selectors";
+import { selectCountries, selectManufacturers, selectStrength } from "@/store/common/selectors";
 import React, { useState } from "react";
 import { getProducts } from "@/store/data/thunks";
 import { selectCurrentPage } from "@/store/data/selectors";
@@ -27,11 +27,13 @@ export type TSidebarFilters = {
   maxPrice: number | string;
   manufacturer: Array<string>;
   country: Array<string>;
+  strength: Array<string>;
 };
 
 const initialFilters: TSidebarFilters = {
   manufacturer: [],
   country: [],
+  strength: [],
   maxPrice: 0,
   minPrice: 0,
 };
@@ -44,6 +46,7 @@ export const Sidebar: React.FC<SidebarType> = ({ isDrawer }) => {
   const dispatch = useDispatch();
   const manufacturers = useSelector(selectCountries);
   const countries = useSelector(selectManufacturers);
+  const strength = useSelector(selectStrength);
   const currentPage = useSelector(selectCurrentPage);
   const [filters, setFilters] = useState<TSidebarFilters>(initialFilters);
   const sidebarLinks = [
@@ -58,6 +61,12 @@ export const Sidebar: React.FC<SidebarType> = ({ isDrawer }) => {
       icon: IconBuildingFactory2,
       initiallyOpened: true,
       links: countries,
+    },
+    {
+      label: "Крепкость",
+      links: strength,
+      icon: IconChartBar,
+      initiallyOpened: true,
     },
   ];
 
@@ -95,6 +104,25 @@ export const Sidebar: React.FC<SidebarType> = ({ isDrawer }) => {
             country: [
               ...prevFilters.country.slice(0, index),
               ...prevFilters.country.slice(index + 1),
+            ],
+          };
+        }
+      });
+    }
+    if (label.toLowerCase() === SIDEBAR_LABELS.STRENGTH.toLowerCase()) {
+      setFilters((prevFilters) => {
+        const index = prevFilters.strength.indexOf(value);
+        if (index === -1) {
+          return {
+            ...prevFilters,
+            strength: [...prevFilters.strength, value],
+          };
+        } else {
+          return {
+            ...prevFilters,
+            strength: [
+              ...prevFilters.strength.slice(0, index),
+              ...prevFilters.strength.slice(index + 1),
             ],
           };
         }

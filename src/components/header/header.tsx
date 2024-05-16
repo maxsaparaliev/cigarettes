@@ -1,4 +1,4 @@
-import { Burger, Flex, Group } from "@mantine/core";
+import { Burger, Flex, Group, Button } from "@mantine/core";
 import { useDisclosure, useViewportSize } from "@mantine/hooks";
 import classes from "./header.module.scss";
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Logotype } from "@/utils/logo";
 import cn from "classnames";
 import { MobileHeader } from "@/components/header/mobile-header";
+import {IconArrowRight} from "@tabler/icons-react";
 
 const links = [{ link: "/basket", label: "Корзина/Заказать" }];
 
@@ -34,7 +35,15 @@ export const Header = () => {
             <Logotype />
           </Link>
           <Group gap={5} visibleFrom="xs">
-            {items}
+            {/*{items}*/}
+            <Button
+              component="a"
+              href="/basket"
+              variant="light"
+              rightSection={<IconArrowRight size={14} />}
+            >
+              Корзина
+            </Button>
           </Group>
 
           <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />

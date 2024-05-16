@@ -47,7 +47,8 @@ export function LinksGroup({
       size={"xs"}
       checked={
         filters?.manufacturer.includes(link.value) ||
-        filters?.country.includes(link.value)
+        filters?.country.includes(link.value) ||
+        filters?.strength.includes(link.value)
       }
       onChange={() =>
         handleCheckBox({ id: link.id, value: link.value, label: label })
