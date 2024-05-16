@@ -17,7 +17,7 @@ const data = [
     title: 'Контакты',
     links: [
       { label: 'info@americancigarettes.ru', link: '#' },
-      { label: '+78843284838', link: '#' },
+      { label: '+79012221101', link: '#' },
     ],
   },
 ];

@@ -1,4 +1,4 @@
-import { IconHeart } from "@tabler/icons-react";
+import {IconHeart} from "@tabler/icons-react";
 import {
   ActionIcon,
   Card,
@@ -7,17 +7,19 @@ import {
   Image,
   Text,
   Tooltip,
+  Button,
+  UnstyledButton,
   useMantineTheme,
 } from "@mantine/core";
 import classes from "./product-card.module.scss";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addToBasket, removeFromBasket } from "@/store/basket/reducers";
-import { notifications } from "@mantine/notifications";
+import {useDispatch, useSelector} from "react-redux";
+import {addToBasket, removeFromBasket} from "@/store/basket/reducers";
+import {notifications} from "@mantine/notifications";
 import Link from "next/link";
 import cn from "classnames";
-import { selectBasketData } from "@/store/basket/selectors";
-import { NOTIFICATION } from "@/constants/constants";
+import {selectBasketData} from "@/store/basket/selectors";
+import {NOTIFICATION} from "@/constants/constants";
 
 export type TProductData = {
   id: number;
@@ -38,7 +40,7 @@ export type TProductData = {
 type Props = {
   product: TProductData;
 };
-export const ProductCard: React.FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<Props> = ({product}) => {
   const theme = useMantineTheme();
   const dispatch = useDispatch();
   const basketData = useSelector(selectBasketData);
@@ -68,7 +70,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   const addProduct = () => {
     if (!isAddedToFav) {
-      dispatch(addToBasket({ ...product, amount: 1 }));
+      dispatch(addToBasket({...product, amount: 1}));
       notifications.show(NOTIFICATION.added);
     }
     if (isAddedToFav) {
@@ -85,7 +87,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           href={productLink.href}
           as={productLink.as}
         >
-          <Image src={image} alt={"product-card"} height={200} width={300} />
+          <Image src={image} alt={"product-card"} height={200} width={300}/>
         </Link>
       </Card.Section>
 
@@ -131,32 +133,17 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
         <Center>
           <Text fw={700}>{price} руб</Text>
         </Center>
-
-        <Group gap={8} mr={0}>
-          <Tooltip
-            label="Добавить в корзину"
-            color="rgba(0, 0, 0, 1)"
-            arrowOffset={11}
-            arrowSize={4}
-            withArrow
-            openDelay={500}
+        <UnstyledButton>
+          <Text
+            component={"a"}
+            variant="transparent"
+            td={"underlined"}
+            onClick={addProduct}
+            color={isAddedToFav ? "red" : "cyan"}
           >
-            <ActionIcon
-              variant={"white"}
-              color="indigo"
-              size="md"
-              onClick={addProduct}
-            >
-              <IconHeart
-                stroke={1}
-                color={
-                  isAddedToFav ? theme.colors.red[8] : theme.colors.gray[8]
-                }
-                fill={isAddedToFav ? theme.colors.red[8] : theme.colors.gray[1]}
-              />
-            </ActionIcon>
-          </Tooltip>
-        </Group>
+            <p>{isAddedToFav ? "удалить из корзины" : "в корзину"}</p>
+          </Text>
+        </UnstyledButton>
       </Group>
     </Card>
   );

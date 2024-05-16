@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { supabase } from "@/utils/supabase";
 import { SUPABASE_TABLES } from "@/constants/constants";
-import { setCountries, setManufacturers } from "@/store/common/reducers";
+import { setCountries, setManufacturers, setStrength} from "@/store/common/reducers";
 import { TSidebarItem } from "@/api/types";
 
 export const getManufacturers = createAsyncThunk<
@@ -27,6 +27,20 @@ export const getCountries = createAsyncThunk<
   try {
     const response = await supabase.from(SUPABASE_TABLES.COUNTRIES).select();
     dispatch(setCountries(response.data as TSidebarItem[]));
+  } catch (error) {
+    return rejectWithValue(error as Error);
+  }
+});
+
+
+export const getStrength = createAsyncThunk<
+  void,
+  void,
+  { rejectValue: Error }
+  >("common/getStrength", async (_, { dispatch, rejectWithValue }) => {
+  try {
+    const response = await supabase.from(SUPABASE_TABLES.STRENGTH).select();
+    dispatch(setStrength(response.data as TSidebarItem[]));
   } catch (error) {
     return rejectWithValue(error as Error);
   }

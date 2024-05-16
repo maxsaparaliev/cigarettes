@@ -44,10 +44,6 @@ $mantine-breakpoint-xl: '88em';
   .groups {
     display: flex;
     flex-wrap: wrap;
-
-    @media (max-width: $mantine-breakpoint-sm) {
-      display: none;
-    }
   }
 
   .wrapper {
