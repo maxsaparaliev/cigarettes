@@ -1,8 +1,9 @@
-import { Drawer, Group } from "@mantine/core";
+import {Button, Drawer, Group} from "@mantine/core";
 import { Sidebar } from "@/components/sidebar/sidebar";
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import {IconArrowRight} from "@tabler/icons-react";
 
 type MobileHeaderType = {
   opened: boolean;
@@ -25,13 +26,14 @@ export const MobileHeader: React.FC<MobileHeaderType> = ({
         </Drawer.Header>
         <Drawer.Body className={" h-full"}>
           <Group grow className={"pb-4 pt-2"}>
-            <Link
-              onClick={onClose}
-              href={"/basket"}
-              className={"text-lg underline"}
+            <Button
+              component="a"
+              href="/basket"
+              variant="light"
+              rightSection={<IconArrowRight size={14} />}
             >
-              Корзина/Заказать
-            </Link>
+              Корзина
+            </Button>
           </Group>
           {isMainPage && <Sidebar isDrawer={true} />}
         </Drawer.Body>

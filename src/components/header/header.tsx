@@ -9,18 +9,11 @@ import cn from "classnames";
 import { MobileHeader } from "@/components/header/mobile-header";
 import {IconArrowRight} from "@tabler/icons-react";
 
-const links = [{ link: "/basket", label: "Корзина/Заказать" }];
-
 export const Header = () => {
   const [opened, { toggle }] = useDisclosure(false);
   const basketData = useSelector(selectBasketData);
   const { width } = useViewportSize();
 
-  const items = links.map((link) => (
-    <Link key={link.label} href={link.link} className={cn([classes.link])}>
-      {link.label}
-    </Link>
-  ));
 
   return (
     <Flex
@@ -35,7 +28,6 @@ export const Header = () => {
             <Logotype />
           </Link>
           <Group gap={5} visibleFrom="xs">
-            {/*{items}*/}
             <Button
               component="a"
               href="/basket"
