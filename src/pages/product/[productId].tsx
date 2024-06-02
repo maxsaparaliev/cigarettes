@@ -9,15 +9,16 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/router";
-import { getProduct } from "@/store/product/thunks";
-import { selectProduct } from "@/store/product/selectors";
-import { addToBasket } from "@/store/basket/reducers";
-import { notifications } from "@mantine/notifications";
-import { NOTIFICATION } from "@/constants/constants";
-import { setProduct } from "@/store/product/reducers";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {useRouter} from "next/router";
+import {getProduct} from "@/store/product/thunks";
+import {selectProduct} from "@/store/product/selectors";
+import {addToBasket} from "@/store/basket/reducers";
+import {notifications} from "@mantine/notifications";
+import {NOTIFICATION} from "@/constants/constants";
+import {setProduct} from "@/store/product/reducers";
+import MetaHead from "../../components/meta-head/meta-head";
 
 const DetailPage = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const DetailPage = () => {
   const router = useRouter();
 
   const addProduct = () => {
-    product && dispatch(addToBasket({ ...product, amount: 1 }));
+    product && dispatch(addToBasket({...product, amount: 1}));
     notifications.show(NOTIFICATION.added);
   };
 
@@ -36,7 +37,7 @@ const DetailPage = () => {
 
   useEffect(() => {
     if (queryValue) {
-      dispatch(getProduct({ id: parseInt(queryValue as string) }) as any);
+      dispatch(getProduct({id: parseInt(queryValue as string)}) as any);
     }
     return () => {
       dispatch(setProduct(null) as any);
@@ -45,9 +46,10 @@ const DetailPage = () => {
 
   return (
     <div className={"h-full mt-10"}>
+      <MetaHead title={product?.title}/>
       {!product ? (
         <Center className={"mt-16"}>
-          <Loader color="indigo" />
+          <Loader color="indigo"/>
         </Center>
       ) : (
         <Flex
@@ -58,7 +60,7 @@ const DetailPage = () => {
           gap={"xl"}
         >
           <Center className={"md:w-1/2 w-full"}>
-            <Image src={product?.image} />
+            <Image src={product?.image}/>
           </Center>
           <Stack gap={"lg"} className={"md:w-1/2 w-full"}>
             <Title className={"pt-5 capitalize "} order={2}>

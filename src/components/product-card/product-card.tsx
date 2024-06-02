@@ -9,13 +9,14 @@ import {
 } from "@mantine/core";
 import classes from "./product-card.module.scss";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addToBasket, removeFromBasket } from "@/store/basket/reducers";
-import { notifications } from "@mantine/notifications";
+import {useDispatch, useSelector} from "react-redux";
+import {addToBasket, removeFromBasket} from "@/store/basket/reducers";
+import {notifications} from "@mantine/notifications";
 import Link from "next/link";
 import cn from "classnames";
-import { selectBasketData } from "@/store/basket/selectors";
-import { NOTIFICATION } from "@/constants/constants";
+import {selectBasketData} from "@/store/basket/selectors";
+import {NOTIFICATION} from "@/constants/constants";
+import MetaHead from "../meta-head/meta-head";
 
 export type TProductData = {
   id: number;
@@ -35,7 +36,7 @@ export type TProductData = {
 type Props = {
   product: TProductData;
 };
-export const ProductCard: React.FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<Props> = ({product}) => {
   const theme = useMantineTheme();
   const dispatch = useDispatch();
   const basketData = useSelector(selectBasketData);
@@ -64,7 +65,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   const addProduct = () => {
     if (!isAddedToFav) {
-      dispatch(addToBasket({ ...product, amount: 1 }));
+      dispatch(addToBasket({...product, amount: 1}));
       notifications.show(NOTIFICATION.added);
     }
     if (isAddedToFav) {
@@ -74,70 +75,72 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   };
 
   return (
-    <Card shadow={"md"} radius="xs" className={cn([classes.card])}>
-      <Card.Section className={"h-full flex items-center"}>
-        <Link
-          className={"text-neutral-950 h-full"}
-          href={productLink.href}
-          as={productLink.as}
-        >
-          <Image
-            src={image}
-            alt={"product-card"}
-            height={200}
-            width={300}
-            className={"h-full"}
-          />
-        </Link>
-      </Card.Section>
-
-      <Group>
-        <Link
-          className={"text-neutral-950"}
-          href={productLink.href}
-          as={productLink.as}
-        >
-          <Text
-            className={cn([classes.title, "text-dark"])}
-            fw={500}
-            component="a"
-            truncate={"end"}
-            lineClamp={2}
+    <>
+      <Card shadow={"md"} radius="xs" className={cn([classes.card])}>
+        <Card.Section className={"h-full flex items-center"}>
+          <Link
+            className={"text-neutral-950 h-full"}
+            href={productLink.href}
+            as={productLink.as}
           >
-            {title}
-          </Text>
-        </Link>
+            <Image
+              src={image}
+              alt={"product-card"}
+              height={200}
+              width={300}
+              className={"h-full"}
+            />
+          </Link>
+        </Card.Section>
 
-        <Text fz="sm" c="dimmed" lineClamp={3}>
-          {description}
-        </Text>
-
-        <Group justify={"space-between"} className={classes.country}>
-          <Text c="dimmed" fz="sm">
-            Страна
-          </Text>
-          <Text c="dimmed" fz="sm">
-            {country}
-          </Text>
-        </Group>
-
-        <Group justify="space-between" className={classes.footer}>
-          <Center>
-            <Text fw={700}>{price} руб</Text>
-          </Center>
-          <UnstyledButton>
+        <Group>
+          <Link
+            className={"text-neutral-950"}
+            href={productLink.href}
+            as={productLink.as}
+          >
             <Text
-              component={"a"}
-              variant="transparent"
-              td={"underlined"}
-              onClick={addProduct}
-              color={isAddedToFav ? "red" : "cyan"}
+              className={cn([classes.title, "text-dark"])}
+              fw={500}
+              component="a"
+              truncate={"end"}
+              lineClamp={2}
             >
-              <p>{isAddedToFav ? "удалить из корзины" : "в корзину"}</p>
+              {title}
             </Text>
-          </UnstyledButton>
+          </Link>
+
+          <Text fz="sm" c="dimmed" lineClamp={3}>
+            {description}
+          </Text>
+
+          <Group justify={"space-between"} className={classes.country}>
+            <Text c="dimmed" fz="sm">
+              Страна
+            </Text>
+            <Text c="dimmed" fz="sm">
+              {country}
+            </Text>
+          </Group>
+
+          <Group justify="space-between" className={classes.footer}>
+            <Center>
+              <Text fw={700}>{price} руб</Text>
+            </Center>
+            <UnstyledButton>
+              <Text
+                component={"a"}
+                variant="transparent"
+                td={"underlined"}
+                onClick={addProduct}
+                color={isAddedToFav ? "red" : "cyan"}
+              >
+                <p>{isAddedToFav ? "удалить из корзины" : "в корзину"}</p>
+              </Text>
+            </UnstyledButton>
+          </Group>
         </Group>
-      </Group>
-    </Card>
+      </Card>
+    </>
   );
 };
