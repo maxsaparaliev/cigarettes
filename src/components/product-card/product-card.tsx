@@ -27,10 +27,9 @@ export type TProductData = {
   description: string;
   image: string;
   manufacturer: string;
-  nicotine: number;
   pack: string;
   price: number;
-  tar: number;
+  strength: string;
 };
 
 type Props = {
@@ -42,7 +41,6 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   const basketData = useSelector(selectBasketData);
 
   const {
-    tar,
     country,
     id,
     available,
@@ -50,11 +48,11 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     created_at,
     description,
     manufacturer,
-    nicotine,
     pack,
     price,
     image,
     title,
+    strength,
   } = product;
 
   const isAddedToFav = basketData.find((product) => product.id === id);
@@ -77,13 +75,19 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   return (
     <Card shadow={"md"} radius="xs" className={cn([classes.card])}>
-      <Card.Section>
+      <Card.Section className={"h-full flex items-center"}>
         <Link
-          className={"text-neutral-950"}
+          className={"text-neutral-950 h-full"}
           href={productLink.href}
           as={productLink.as}
         >
-          <Image src={image} alt={"product-card"} height={200} width={300} />
+          <Image
+            src={image}
+            alt={"product-card"}
+            height={200}
+            width={300}
+            className={"h-full"}
+          />
         </Link>
       </Card.Section>
 

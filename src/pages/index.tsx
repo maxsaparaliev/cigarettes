@@ -4,7 +4,11 @@ import { Sorting } from "@/components/sorting/sorting";
 import React, { useEffect, useState } from "react";
 import { Pagination } from "@/components/pagination/pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries, getManufacturers, getStrength } from "@/store/common/thunks";
+import {
+  getCountries,
+  getManufacturers,
+  getStrength,
+} from "@/store/common/thunks";
 import { getProducts } from "@/store/data/thunks";
 import {
   selectCurrentPage,

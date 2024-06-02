@@ -24,7 +24,6 @@ const DetailPage = () => {
   const product = useSelector(selectProduct);
   const router = useRouter();
 
-  console.log(product, "product");
   const addProduct = () => {
     product && dispatch(addToBasket({ ...product, amount: 1 }));
     notifications.show(NOTIFICATION.added);
@@ -45,7 +44,7 @@ const DetailPage = () => {
   }, [queryValue]);
 
   return (
-    <div className={"h-full"}>
+    <div className={"h-full mt-10"}>
       {!product ? (
         <Center className={"mt-16"}>
           <Loader color="indigo" />
@@ -56,6 +55,7 @@ const DetailPage = () => {
             base: "column",
             sm: "row",
           }}
+          gap={"xl"}
         >
           <Center className={"md:w-1/2 w-full"}>
             <Image src={product?.image} />
@@ -67,8 +67,7 @@ const DetailPage = () => {
             <Text size={"sm"}>{product?.description}</Text>
             <Group gap={"xl"} className={""}>
               <Stack>
-                <Text size="sm">Никотин</Text>
-                <Text size="sm">Смола</Text>
+                <Text size="sm">Крепость</Text>
                 <Text size="sm">Страна</Text>
                 <Text size="sm">Бренд</Text>
                 <Text size="sm">Упаковка</Text>
@@ -76,8 +75,7 @@ const DetailPage = () => {
                 <Text size="sm">Пачка</Text>
               </Stack>
               <Stack>
-                <Text size="sm">{product?.nicotine}</Text>
-                <Text size="sm">{product?.tar}</Text>
+                <Text size="sm">{product?.strength || ""}</Text>
                 <Text size="sm">{product?.country}</Text>
                 <Text size="sm">{product?.manufacturer}</Text>
                 <Text size="sm">{product?.capacity}</Text>
