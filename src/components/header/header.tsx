@@ -29,7 +29,7 @@ export const Header = () => {
           <Group gap={5} visibleFrom="xs">
             <Link href="/basket">
               <Button
-                component="a"
+                // component="a"
                 variant="light"
                 rightSection={<IconArrowRight size={14} />}
               >

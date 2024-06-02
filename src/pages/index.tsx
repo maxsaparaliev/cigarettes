@@ -19,6 +19,7 @@ import {
 import { setCurrentPage } from "@/store/data/reducers";
 import { PAGE_SIZE, SORT_VALUES } from "@/constants/constants";
 import { SkeletonCard } from "@/components/skeleton-card/skeleton-card";
+import MetaHead from "../components/meta-head/meta-head";
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ const Home: React.FC = () => {
 
   return (
     <>
+      <MetaHead title={"American cigarettes"}/>
       <Flex justify={"flex-end"}>
         <Sorting handler={handleSorting} />
       </Flex>
